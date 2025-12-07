@@ -69,7 +69,7 @@ const TopRatedTravelers = () => {
   return (
     <>
       {/* All Stories Grid */}
-      <div className="mb-16 container mx-auto max-w-7xl">
+      <div className="py-20 container mx-auto max-w-7xl">
         <h2 className="text-3xl font-bold text-slate-800 dark:text-white mb-8 text-center">
           Top Rated Travelers
         </h2>

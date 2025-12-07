@@ -26,13 +26,13 @@ export const registerUser = async (_currentState: any, formData: any): Promise<a
           registerUserValidationZodSchema
         ).data;
         const registerData = {
-            password: validatedPayload.password,
-            user: {
-                name: validatedPayload.name,
-                address: validatedPayload.address,
-                email: validatedPayload.email,
-            }
-        }
+          password: validatedPayload.password,
+          user: {
+            name: validatedPayload.name,
+            address: validatedPayload.address,
+            email: validatedPayload.email,
+          },
+        };
 
         const newFormData = new FormData();
 
