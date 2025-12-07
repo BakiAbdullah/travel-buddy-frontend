@@ -1,5 +1,6 @@
 "use client";
 
+import Logo from "@/assets/Logo";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { SheetTitle } from "@/components/ui/sheet";
@@ -27,8 +28,8 @@ const DashboardMobileSidebar = ({
     <div className=" flex h-full flex-col">
       {/* Logo */}
       <div className="flex h-16 items-center border-b px-6">
-        <Link href={dashboardHome}>
-          <span className="text-xl font-bold text-primary">PH Healthcare</span>
+        <Link href={dashboardHome} className="flex items-center space-x-2">
+          <Logo />
         </Link>
       </div>
       <SheetTitle className="sr-only">Navigation Menu</SheetTitle>

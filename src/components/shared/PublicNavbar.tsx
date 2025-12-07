@@ -14,69 +14,9 @@ import {
 
 import { getUserInfo } from "@/services/auth/getUserInfo";
 import { IUserInfo } from "@/types/user.interface";
-import {
-  Coins,
-  InboxIcon,
-  LayoutDashboard,
-  PlaneIcon,
-  Search,
-  SquareUser,
-  User2,
-  UserCog
-} from "lucide-react";
 import Link from "next/link";
-
-// Navigation links array to be used in both desktop and mobile menus
-export const navigationLinks = [
-  {
-    href: "/explore-travelers",
-    label: "Explore Travelers",
-    icon: SquareUser,
-    allowedRoles: ["COMMON", "USER"],
-  },
-  {
-    href: "/my-travel-plans",
-    label: "My Travel Plans",
-    icon: InboxIcon,
-    allowedRoles: ["USER"],
-  },
-  {
-    href: "/find-travel-buddy",
-    label: "Find Travel Buddy",
-    icon: Search,
-    allowedRoles: ["COMMON"],
-  },
-  {
-    href: "/profile",
-    label: "Profile",
-    icon: User2,
-    allowedRoles: ["USER"],
-  },
-  {
-    href: "/admin/dashboard",
-    label: "Admin Dashboard",
-    icon: LayoutDashboard,
-    allowedRoles: ["ADMIN"],
-  },
-  {
-    href: "/admin/dashboard/manage-users",
-    label: "Manage Users",
-    icon: UserCog,
-    allowedRoles: ["ADMIN"],
-  },
-  {
-    href: "/admin/dashboard/manage-travel-plans",
-    label: "Manage Travel Plans",
-    icon: PlaneIcon,
-    allowedRoles: ["ADMIN"],
-  },
-  {
-    href: "/profile",
-    label: "Profile",
-    icon: User2,
-    allowedRoles: ["ADMIN"],
-  },
-];
+import LogoutButton from "./LogoutButton";
+import { navigationLinks } from "@/utils/navLinks";
 
 export default async function PublicNavbar() {
   const userInfo = (await getUserInfo()) as IUserInfo;
@@ -202,14 +142,7 @@ export default async function PublicNavbar() {
           {/* Login & Logout */}
           <div className="flex items-center gap-4">
             {userInfo?.email ? (
-              <Button
-                // onClick={handleLogout}
-                variant="outline"
-                size="sm"
-                className="text-sm cursor-pointer"
-              >
-                Logout
-              </Button>
+              <LogoutButton />
             ) : (
               <div className="flex gap-2">
                 <Button
@@ -219,10 +152,11 @@ export default async function PublicNavbar() {
                 >
                   <Link href="/login">Login</Link>
                 </Button>
-                <Button
+                  <Button
+                    variant={"outline"}
                   asChild
                   size="sm"
-                  className="text-sm bg-red-500 hover:bg-red-700 text-white cursor-pointer"
+                  className="text-sm text-slate-900 cursor-pointer"
                 >
                   <Link href="/register">Register</Link>
                 </Button>

@@ -1,5 +1,28 @@
 import { TUserRole } from "./userRole";
 
+export type TravelType = "SOLO" | "FAMILY" | "FRIENDS";
+
+export type Visibility = "PUBLIC" | "PRIVATE";
+
+export interface ITravelPlan {
+  id: string;
+  userId: string;
+
+  destination: string;
+  itinerary: string;
+
+  budgetRange: string; // e.g. "1000 - 1100"
+
+  startDateTime: string; // ISO date string
+  endDateTime: string; // ISO date string
+
+  travelType: TravelType;
+  visibility: Visibility;
+
+  createdAt: string; // ISO timestamp
+  updatedAt: string; // ISO timestamp
+}
+
 export interface IUserInfo {
   id: string;
   name: string;
@@ -9,10 +32,11 @@ export interface IUserInfo {
   role: TUserRole;
   profileImage?: string;
   visitedCountries?: string[];
-  travelPlans?: string[];
+  travelPlans?: ITravelPlan[];
   travelInterests?: string[];
   rating: number;
-  reviewsGiven: number[]
+  reviewsGiven: number[];
+  reviewsReceived: number[];
   needPasswordChange: boolean;
   contactNumber?: string;
   status: "ACTIVE" | "BLOCKED" | "DELETED";

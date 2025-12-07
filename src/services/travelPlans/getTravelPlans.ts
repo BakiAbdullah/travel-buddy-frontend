@@ -1,0 +1,40 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use server"
+
+import { serverFetch } from "@/lib/serverFetch";
+
+export async function getAllTravelPlans() {
+  try {
+    const response = await serverFetch.get(`/travel-plans/match`);
+    const result = await response.json();
+    return result?.data || [];
+  } catch (error: any) {
+    console.log(error);
+    return {
+      success: false,
+      message: `${
+        process.env.NODE_ENV === "development"
+          ? error.message
+          : "Something went wrong"
+      }`,
+    };
+  }
+}
+
+export async function getMyTravelPlans() {
+  try {
+    const response = await serverFetch.get(`/travel-plans/my-plans`);
+    const result = await response.json();
+    return result?.data || [];
+  } catch (error: any) {
+    console.log(error);
+    return {
+      success: false,
+      message: `${
+        process.env.NODE_ENV === "development"
+          ? error.message
+          : "Something went wrong"
+      }`,
+    };
+  }
+}

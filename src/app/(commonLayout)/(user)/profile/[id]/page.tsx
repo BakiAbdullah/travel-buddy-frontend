@@ -1,7 +1,13 @@
-const UserDetailsPage = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
-  console.log(id)
-  return <div>User Details Page</div>;
-};
+import UserProfile from "@/components/modules/UserProfile/UserProfile";
+import { getSingleUser } from "@/services/user/getSingleUser";
 
-export default UserDetailsPage;
+const UserDetailsPage = async ({ params }: { params: { id: string } }) => {
+    const { id } = await params;
+    const user = await getSingleUser(id);
+  const userData = user?.data;
+  return (
+    <UserProfile userData={userData}/>
+  )
+}
+
+export default UserDetailsPage
