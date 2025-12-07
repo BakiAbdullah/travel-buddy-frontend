@@ -46,11 +46,11 @@ export default function UserProfile({userData}:MyProfileProps) {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-20 px-4">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 py-20 px-4">
       <div className="max-w-4xl mx-auto">
         {/* Header Card */}
         <div className="bg-white rounded-2xl shadow-lg overflow-hidden mb-6">
-          <div className="h-32 bg-gradient-to-r from-blue-500 to-indigo-600"></div>
+          <div className="h-32 bg-linear-to-r from-blue-500 to-indigo-600"></div>
           <div className="px-8 pb-8">
             <div className="flex flex-col sm:flex-row items-center sm:items-end -mt-16 mb-6">
               <Image
@@ -147,7 +147,7 @@ export default function UserProfile({userData}:MyProfileProps) {
             {userData?.travelInterests!.map((interest, index) => (
               <span
                 key={index}
-                className="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-full font-medium shadow-md"
+                className="px-4 py-2 bg-linear-to-r from-blue-500 to-indigo-600 text-white rounded-full font-medium shadow-md"
               >
                 {interest}
               </span>
@@ -198,8 +198,8 @@ export default function UserProfile({userData}:MyProfileProps) {
                     <Image
                       height={150}
                       width={150}
-                      src={review?.reviewer?.profileImage || ''}
-                      alt={review?.reviewer?.name || ''}
+                      src={review?.reviewer?.profileImage || ""}
+                      alt={review?.reviewer?.name || ""}
                       className="w-12 h-12 rounded-full object-cover"
                     />
                     <div className="flex-1">
