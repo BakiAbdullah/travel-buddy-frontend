@@ -21,11 +21,13 @@ export async function getAllTravelPlans() {
   }
 }
 
-export async function getMyTravelPlans() {
+export async function getMyTravelPlans(queryString:string) {
   try {
-    const response = await serverFetch.get(`/travel-plans/my-plans`);
+    const response = await serverFetch.get(
+      `/travel-plans/my-plans${queryString ? `?${queryString}` : ""}`
+    );
     const result = await response.json();
-    return result?.data || [];
+    return result;
   } catch (error: any) {
     console.log(error);
     return {

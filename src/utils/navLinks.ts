@@ -17,7 +17,7 @@ export const navigationLinks = [
     allowedRoles: ["COMMON", "USER"],
   },
   {
-    href: "/my-travel-plans",
+    href: "/dashboard/my-travel-plans",
     label: "My Travel Plans",
     icon: InboxIcon,
     allowedRoles: ["USER"],

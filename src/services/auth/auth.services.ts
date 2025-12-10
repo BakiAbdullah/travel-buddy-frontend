@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use server";
 
 import { zodValidator } from "@/lib/zodValidator";
@@ -10,11 +11,12 @@ import { getUserInfo } from "./getUserInfo";
 import { serverFetch } from "@/lib/serverFetch";
 import { deleteCookie, getCookie, setCookie } from "./cookieHandlers";
 import { TUserRole } from "@/types/userRole";
-import { getDefaultDashboardRoute, isValidRedirectForRole } from "@/lib/auth-utils";
+import {
+  getDefaultDashboardRoute,
+  isValidRedirectForRole,
+} from "@/lib/auth-utils";
 import { verifyAccessToken } from "@/lib/jwtHanlders";
 
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
 export async function updateMyProfile(formData: FormData) {
   try {
     // Create a new FormData with the data property
@@ -37,7 +39,10 @@ export async function updateMyProfile(formData: FormData) {
       uploadFormData.append("file", file);
     }
 
-    const response = await serverFetch.patch(`/users/update-my-profile`, {
+    const response = await serverFetch.patch(`/users/me/update`, {
+      // headers: {
+      //   "Content-Type": "application/json",
+      // },
       body: uploadFormData,
     });
 

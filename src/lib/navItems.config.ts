@@ -32,25 +32,14 @@ export const userNavItems: NavSection[] = [
     items: [
       {
         title: "My Travel Plans",
-        href: "/dashboard/travel-plans",
+        href: "/dashboard/my-travel-plans",
         icon: "Calendar",
         roles: ["USER"],
       },
       {
-        title: "Add Travel Plan",
-        href: "/dashboard/create-travel-plan",
+        title: "Travel Requests",
+        href: "/dashboard/travel-requests",
         icon: "ClipboardList",
-        roles: ["USER"],
-      },
-    ],
-  },
-  {
-    title: "Medical Records",
-    items: [
-      {
-        title: "My Prescriptions",
-        href: "/dashboard/my-prescriptions",
-        icon: "FileText", 
         roles: ["USER"],
       },
     ],
@@ -74,12 +63,6 @@ export const adminNavItems: NavSection[] = [
     title: "Users Management",
     items: [
       {
-        title: "Admins",
-        href: "/admin/dashboard/admins-management",
-        icon: "Shield", // ✅ String
-        roles: ["ADMIN"],
-      },
-      {
         title: "Users",
         href: "/admin/dashboard/users-management",
         icon: "Users", // ✅ String
@@ -88,24 +71,18 @@ export const adminNavItems: NavSection[] = [
     ],
   },
   {
-    title: "Travel Management",
+    title: "Travel Plans Management",
     items: [
       {
-        title: "Appointments",
-        href: "/admin/dashboard/appointments-management",
-        icon: "Calendar", // ✅ String
+        title: "Manage Travel Plans",
+        href: "/admin/dashboard/manage-travel-plans",
+        icon: "Settings", // ✅ String
         roles: ["ADMIN"],
       },
       {
-        title: "Schedules",
-        href: "/admin/dashboard/schedules-management",
-        icon: "Clock", // ✅ String
-        roles: ["ADMIN"],
-      },
-      {
-        title: "Specialities",
-        href: "/admin/dashboard/specialities-management",
-        icon: "Hospital", // ✅ String
+        title: "Manage Payments",
+        href: "/admin/dashboard/manage-payments",
+        icon: "Coins", // ✅ String
         roles: ["ADMIN"],
       },
     ],

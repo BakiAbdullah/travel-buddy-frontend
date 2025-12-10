@@ -1,21 +1,19 @@
 import { TUserRole } from "./userRole";
 
 export type TravelType = "SOLO" | "FAMILY" | "FRIENDS";
-
 export type Visibility = "PUBLIC" | "PRIVATE";
 
 export interface ITravelPlan {
   id: string;
   userId: string;
-
   destination: string;
   itinerary: string;
-
+  reviews: string[];
   budgetRange: string; // e.g. "1000 - 1100"
+  travelRequests: string[];
 
   startDateTime: string; // ISO date string
   endDateTime: string; // ISO date string
-
   travelType: TravelType;
   visibility: Visibility;
 
@@ -30,6 +28,8 @@ export interface IUserInfo {
   bio: string;
   currentLocation?: string;
   role: TUserRole;
+  isDeleted: boolean;
+  isVerified: boolean;
   profileImage?: string;
   visitedCountries?: string[];
   travelPlans?: ITravelPlan[];

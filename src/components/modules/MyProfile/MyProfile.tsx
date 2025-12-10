@@ -1,39 +1,38 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Camera,
-  Save,
-  Loader2,
-  MapPin,
-  Globe,
-  Calendar,
-  Star,
-  Award,
-  Heart,
-  Compass,
-  Plane,
-  Mountain,
-  Users,
-  Mail,
-  Phone,
-  Shield,
-  Locate,
-  UserPen,
-  CarIcon,
-  CarFront,
-  EyeIcon,
-} from "lucide-react";
-import { updateMyProfile } from "@/services/auth/auth.services";
 import { getInitials } from "@/lib/formatters";
+import { updateMyProfile } from "@/services/auth/auth.services";
 import { IUserInfo } from "@/types/user.interface";
+import {
+  Award,
+  Calendar,
+  Camera,
+  CarFront,
+  Compass,
+  EyeIcon,
+  Globe,
+  Heart,
+  Loader2,
+  Locate,
+  Mail,
+  MapPin,
+  Mountain,
+  Phone,
+  Plane,
+  Save,
+  Shield,
+  Star,
+  UserPen,
+  Users
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState, useTransition } from "react";
 
 interface MyProfileProps {
   userInfo: IUserInfo;
@@ -182,7 +181,7 @@ const MyProfile = ({ userInfo }: MyProfileProps) => {
                     <div className="flex items-center justify-center gap-2 mb-2">
                       <Star className="w-5 h-5 text-yellow-500 fill-yellow-500" />
                       <span className="text-2xl font-bold text-slate-900 dark:text-white">
-                        {userInfo.rating.toFixed(1)}
+                        {userInfo?.rating?.toFixed(1) || 0.0}
                       </span>
                     </div>
                     <p className="text-xs text-center text-slate-600 dark:text-slate-400">

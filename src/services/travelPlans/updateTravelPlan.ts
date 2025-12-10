@@ -3,10 +3,11 @@
 
 import { serverFetch } from "@/lib/serverFetch";
 import { zodValidator } from "@/lib/zodValidator";
-import { createTravelPlanZodSchema } from "@/zod/travelPlan.validation";
+import { updateTravelPlanZodSchema } from "@/zod/travelPlan.validation";
 
-export const createTravelPlan = async (_prevState: any, formData: FormData) => {
-  
+export const updateTravelPlan = async (_prevState: any, formData: FormData) => {
+  const id = formData.get("id") as string;
+
   const validationPayload: any = {
     destination: formData.get("destination") as string,
     startDateTime: formData.get("startDateTime") as string,
@@ -17,7 +18,7 @@ export const createTravelPlan = async (_prevState: any, formData: FormData) => {
     itinerary: formData.get("itinerary") as string,
   };
 
-  const validation = zodValidator(validationPayload, createTravelPlanZodSchema);
+  const validation = zodValidator(validationPayload, updateTravelPlanZodSchema);
 
   if (!validation.success && validation.errors) {
     return {
@@ -29,20 +30,17 @@ export const createTravelPlan = async (_prevState: any, formData: FormData) => {
   }
 
   try {
-    const response = await serverFetch.post(
-      `/travel-plans/create-travel-plan`,
-      {
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(validation.data),
-      }
-    );
+    const response = await serverFetch.patch(`/travel-plans/${id}`, {
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(validation.data),
+    });
 
     const result = await response.json();
     return result;
   } catch (error: any) {
     return {
       success: false,
-      message: "Failed to create travel plan",
+      message: "Failed to update travel plan",
       formData: validationPayload,
     };
   }
