@@ -3,11 +3,13 @@
 
 import { serverFetch } from "@/lib/serverFetch";
 
-export async function getAllTravelPlans() {
+export async function getAllTravelPlans(queryString:string) {
   try {
-    const response = await serverFetch.get(`/travel-plans/match`);
+    const response = await serverFetch.get(
+      `/travel-plans/match${queryString ? `?${queryString}` : ""}`
+    );
     const result = await response.json();
-    return result?.data || [];
+    return result;
   } catch (error: any) {
     console.log(error);
     return {

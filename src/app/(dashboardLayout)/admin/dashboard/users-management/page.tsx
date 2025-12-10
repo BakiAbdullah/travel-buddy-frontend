@@ -1,5 +1,5 @@
-import UsersManagementTable from "@/components/modules/Admin/UsersManagementTable";
-import TravelPlanFilter from "@/components/modules/User/TravelPlanFilter";
+import UsersManagementTable from "@/components/modules/Admin/UsersManagement/UsersManagementTable";
+import TravelPlanFilter from "@/components/modules/User/TravelPlanManagement.tsx/TravelPlanFilter";
 import ManagementPageHeader from "@/components/shared/DashboardComponents/ManagementPageHeader";
 import TablePagination from "@/components/shared/DashboardComponents/TablePagination";
 import { TableSkeleton } from "@/components/shared/DashboardComponents/TableSkeleton";
@@ -16,11 +16,10 @@ const UserTravelPlanManagementPage = async ({
   const queryString = queryStringFormatter(searchParamsObj);
   const allUsersData = await getAllUsers(queryString);
 
-  console.log({allUsersData})
+  console.log({ allUsersData });
 
   const totalPages = Math.ceil(
-    (allUsersData?.meta?.total || 1) /
-      (allUsersData?.meta?.limit || 1)
+    (allUsersData?.meta?.total || 1) / (allUsersData?.meta?.limit || 1)
   );
 
   return (

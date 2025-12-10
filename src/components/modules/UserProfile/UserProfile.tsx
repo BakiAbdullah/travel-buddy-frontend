@@ -18,7 +18,6 @@ interface MyProfileProps {
 
 export default function UserProfile({userData}:MyProfileProps) {
 
-
   const formatDate = (dateString: any) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {

@@ -1,6 +1,6 @@
-import TravelPlanFilter from "@/components/modules/User/TravelPlanFilter";
-import TravelPlanManagementHeader from "@/components/modules/User/TravelPlanManagementHeader";
-import TravelPlanTable from "@/components/modules/User/TravelPlanTable";
+import TravelPlanFilter from "@/components/modules/User/TravelPlanManagement.tsx/TravelPlanFilter";
+import TravelPlanManagementHeader from "@/components/modules/User/TravelPlanManagement.tsx/TravelPlanManagementHeader";
+import TravelPlanTable from "@/components/modules/User/TravelPlanManagement.tsx/TravelPlanTable";
 import TablePagination from "@/components/shared/DashboardComponents/TablePagination";
 import { TableSkeleton } from "@/components/shared/DashboardComponents/TableSkeleton";
 import { queryStringFormatter } from "@/lib/formatters";
@@ -16,7 +16,7 @@ const UserTravelPlanManagementPage = async ({
   const queryString = queryStringFormatter(searchParamsObj);
   const travelPlansResult = await getMyTravelPlans(queryString);
 
-  console.log({travelPlansResult})
+  console.log({ travelPlansResult });
 
   const totalPages = Math.ceil(
     (travelPlansResult?.meta?.total || 1) /
@@ -29,7 +29,7 @@ const UserTravelPlanManagementPage = async ({
         title="Travel Plan Management"
         description="Manage Travel Plans information and details"
       /> */}
-      <TravelPlanManagementHeader/>
+      <TravelPlanManagementHeader />
 
       {/* Search, Filters */}
       <TravelPlanFilter />

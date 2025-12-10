@@ -1,4 +1,4 @@
-import MyProfile from "@/components/modules/MyProfile/MyProfile";
+import MyProfile from "@/components/modules/User/ProfileManagement.tsx/MyProfile";
 import { getUserInfo } from "@/services/auth/getUserInfo";
 
 

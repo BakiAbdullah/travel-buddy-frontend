@@ -11,7 +11,6 @@ import UsersManagementViewDetailDialog from "./UsersManagementViewDetailDialog";
 import { softDeleteUser } from "@/services/user/getAllUsers";
 import { toast } from "sonner";
 
-
 interface UsersManagementTableProps {
   users: IUserInfo[];
 }
@@ -19,14 +18,9 @@ interface UsersManagementTableProps {
 const UsersManagementTable = ({ users }: UsersManagementTableProps) => {
   const router = useRouter();
   const [, startTransition] = useTransition();
-  const [deletingUsers, setDeletingUsers] =
-    useState<IUserInfo | null>(null);
-  const [viewingUsers, setViewingUsers] = useState<IUserInfo | null>(
-    null
-  );
-  const [editingUsers, setEditingUsers] = useState<IUserInfo | null>(
-    null
-  );
+  const [deletingUsers, setDeletingUsers] = useState<IUserInfo | null>(null);
+  const [viewingUsers, setViewingUsers] = useState<IUserInfo | null>(null);
+  const [editingUsers, setEditingUsers] = useState<IUserInfo | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
   const handleRefresh = () => {

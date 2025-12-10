@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-  ],
+, "src/components/modules/Admin/TravelPlanManagement", "src/components/modules/Admin/UsersManagement"  ],
   "exclude": ["node_modules"]
 }

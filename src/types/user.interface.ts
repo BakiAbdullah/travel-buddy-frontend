@@ -3,24 +3,6 @@ import { TUserRole } from "./userRole";
 export type TravelType = "SOLO" | "FAMILY" | "FRIENDS";
 export type Visibility = "PUBLIC" | "PRIVATE";
 
-export interface ITravelPlan {
-  id: string;
-  userId: string;
-  destination: string;
-  itinerary: string;
-  reviews: string[];
-  budgetRange: string; // e.g. "1000 - 1100"
-  travelRequests: string[];
-
-  startDateTime: string; // ISO date string
-  endDateTime: string; // ISO date string
-  travelType: TravelType;
-  visibility: Visibility;
-
-  createdAt: string; // ISO timestamp
-  updatedAt: string; // ISO timestamp
-}
-
 export interface IUserInfo {
   id: string;
   name: string;
@@ -42,4 +24,22 @@ export interface IUserInfo {
   status: "ACTIVE" | "BLOCKED" | "DELETED";
   createdAt: string;
   updatedAt: string;
+}
+export interface ITravelPlan {
+  id: string;
+  userId: string;
+  user: IUserInfo;
+  destination: string;
+  itinerary: string;
+  reviews: string[];
+  budgetRange: string; // e.g. "1000 - 1100"
+  travelRequests: string[];
+
+  startDateTime: string; // ISO date string
+  endDateTime: string; // ISO date string
+  travelType: TravelType;
+  visibility: Visibility;
+
+  createdAt: string; // ISO timestamp
+  updatedAt: string; // ISO timestamp
 }
