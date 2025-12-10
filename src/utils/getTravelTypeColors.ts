@@ -18,3 +18,10 @@ export const calculateDuration = (start: any, end: any) => {
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   return diffDays;
 };
+
+export const getMatchScoreColor = (score:any) => {
+  if (score >= 90) return "text-green-600 bg-green-50";
+  if (score >= 75) return "text-blue-600 bg-blue-50";
+  if (score >= 60) return "text-yellow-600 bg-yellow-50";
+  return "text-gray-600 bg-gray-50";
+};

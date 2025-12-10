@@ -1,8 +1,13 @@
+import UserMatchedTravelPlan from "@/components/modules/Dashboard/UserMatchedTravelPlan";
+import { getMatchedTravelersForLoggedInUser } from "@/services/travelPlans/getTravelPlans"
 
-const UserDashboardPage = () => {
-  return (
-    <div>User Dashboard Page, Travel History, Public Travel plans in a table or cards</div>
-  )
+const UserDashboardPage = async () => {
+
+  const matchedTravelPlans = await getMatchedTravelersForLoggedInUser();
+
+  console.log({matchedTravelPlans});
+
+  return <UserMatchedTravelPlan matchedTravelPlans={matchedTravelPlans} />;
 }
 
 export default UserDashboardPage

@@ -19,6 +19,8 @@ const UserTravelPlanTable = ({
   usersTravelPlan,
 }: IUserTravelPlanTableProps) => {
 
+  // console.log(usersTravelPlan[0].user,"from table")
+
   const router = useRouter();
   const [, startTransition] = useTransition();
   const [deletingTravelPlan, setDeletingTravelPlan] =

@@ -6,7 +6,28 @@ import { serverFetch } from "@/lib/serverFetch";
 export async function getAllTravelPlans(queryString:string) {
   try {
     const response = await serverFetch.get(
-      `/travel-plans/match${queryString ? `?${queryString}` : ""}`
+      `/travel-plans${queryString ? `?${queryString}` : ""}`
+    );
+    const result = await response.json();
+    return result;
+  } catch (error: any) {
+    console.log(error);
+    return {
+      success: false,
+      message: `${
+        process.env.NODE_ENV === "development"
+          ? error.message
+          : "Something went wrong"
+      }`,
+    };
+  }
+}
+
+// Get Matched Travel Plans for logged in user />>
+export async function getMatchedTravelersForLoggedInUser() {
+  try {
+    const response = await serverFetch.get(
+      `/travel-plans/match`
     );
     const result = await response.json();
     return result;

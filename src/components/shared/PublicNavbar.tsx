@@ -20,7 +20,8 @@ import { navigationLinks } from "@/utils/navLinks";
 
 export default async function PublicNavbar() {
   const userInfo = (await getUserInfo()) as IUserInfo;
-  console.log({ userInfo });
+
+  console.log(userInfo, "from Navbar")
   
   return (
     <header

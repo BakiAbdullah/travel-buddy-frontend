@@ -8,16 +8,16 @@ import {
   Compass,
   Eye,
   Globe,
-  Heart,
   MapPin,
   MessageCircle,
   Search,
+  SearchXIcon,
   Star,
-  TrendingUp,
   Users,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 interface AllUserInfoProps {
@@ -27,7 +27,12 @@ interface AllUserInfoProps {
 const ExploreTravelers = ({ allUsers }: AllUserInfoProps) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedInterest, setSelectedInterest] = useState("all");
-  const [sortBy, setSortBy] = useState("rating");
+  const router = useRouter();
+
+  const handleFindMatch = () => {
+    // Option 1: Navigate to /matched-travel-plans page
+    router.push("/dashboard");
+  };
 
   const travelers = Array.isArray(allUsers) ? allUsers : [];
 
@@ -35,30 +40,21 @@ const ExploreTravelers = ({ allUsers }: AllUserInfoProps) => {
     new Set(travelers.flatMap((t) => t.travelInterests ?? []))
   );
 
-  const filteredTravelers = travelers
-    .filter((traveler) => {
-      const name = traveler.name?.toLowerCase() ?? "";
-      const interests = traveler.travelInterests ?? [];
+  const filteredTravelers = travelers.filter((traveler) => {
+    const name = traveler.name?.toLowerCase() ?? "";
+    const interests = traveler.travelInterests ?? [];
 
-      const matchesSearch =
-        name.includes(searchQuery.toLowerCase()) ||
-        interests.some((i) =>
-          i.toLowerCase().includes(searchQuery.toLowerCase())
-        );
+    const matchesSearch =
+      name.includes(searchQuery.toLowerCase()) ||
+      interests.some((i) =>
+        i.toLowerCase().includes(searchQuery.toLowerCase())
+      );
 
-      const matchesInterest =
-        selectedInterest === "all" || interests.includes(selectedInterest);
+    const matchesInterest =
+      selectedInterest === "all" || interests.includes(selectedInterest);
 
-      return matchesSearch && matchesInterest;
-    })
-    .sort((a, b) => {
-      if (sortBy === "rating") return (b.rating ?? 0) - (a.rating ?? 0);
-      if (sortBy === "countries")
-        return (
-          (b.visitedCountries?.length ?? 0) - (a.visitedCountries?.length ?? 0)
-        );
-      return 0;
-    });
+    return matchesSearch && matchesInterest;
+  });
 
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50/30 to-purple-50/50 dark:from-slate-950 dark:via-indigo-950/30 dark:to-purple-950/50 py-12 px-4 sm:px-6 lg:px-8">
@@ -88,7 +84,7 @@ const ExploreTravelers = ({ allUsers }: AllUserInfoProps) => {
         {/* Search and Filter Bar */}
         <div className="mb-8 space-y-4">
           <div className="bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl shadow-xl border border-slate-200 dark:border-slate-800 p-6">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="justify-center items-center grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Search Input */}
               <div className="md:col-span-2 relative">
                 <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
@@ -100,18 +96,12 @@ const ExploreTravelers = ({ allUsers }: AllUserInfoProps) => {
                   className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
                 />
               </div>
-
-              {/* Sort Dropdown */}
-              <div className="relative">
-                <TrendingUp className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-slate-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all appearance-none cursor-pointer"
-                >
-                  <option value="rating">Highest Rated</option>
-                  <option value="countries">Most Traveled</option>
-                </select>
+              {/* Find Match Button */}
+              <div className="text-center text-md relative md:ms-auto">
+                <button onClick={handleFindMatch} className="w-full bg-linear-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3 px-4 md:px-18 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105 flex items-center justify-center gap-2 cursor-pointer">
+                  <Search className="w-5 h-5" />
+                  <span>Find Match</span>
+                </button>
               </div>
             </div>
 
@@ -295,28 +285,47 @@ const ExploreTravelers = ({ allUsers }: AllUserInfoProps) => {
                 </div>
 
                 {/* Upcoming Trip (if any) */}
-                {traveler.travelPlans!.length > 0 ? (
-                  <div className="mb-4 p-4 bg-linear-to-r from-slate-50 to-blue-50 dark:from-slate-800 dark:to-blue-950/20 rounded-2xl border border-slate-200 dark:border-slate-700">
-                    <div className="flex items-start gap-3">
-                      <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-1 shrink-0" />
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">
-                          Next Trip
-                        </p>
-                        <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
-                          {traveler.travelPlans![0].destination!}
-                        </p>
-                        <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
-                          {new Date(
-                            traveler.travelPlans![0].startDateTime!
-                          ).toLocaleDateString("en-US", {
-                            month: "short",
-                            day: "numeric",
-                          })}
-                        </p>
+                {traveler.travelPlans && traveler.travelPlans.length > 0 ? (
+                  (() => {
+                    // 1️⃣ Filter only future trips
+                    const upcomingTrips = traveler.travelPlans.filter(
+                      (trip) => new Date(trip.startDateTime!) > new Date()
+                    );
+
+                    // 2️⃣ Sort by startDateTime ascending (earliest first)
+                    upcomingTrips.sort(
+                      (a, b) =>
+                        new Date(a.startDateTime!).getTime() -
+                        new Date(b.startDateTime!).getTime()
+                    );
+
+                    // 3️⃣ Pick the first upcoming trip
+                    const nextTrip = upcomingTrips[0];
+
+                    return nextTrip ? (
+                      <div className="mb-4 p-4 bg-linear-to-r from-slate-50 to-blue-50 dark:from-slate-800 dark:to-blue-950/20 rounded-2xl border border-slate-200 dark:border-slate-700">
+                        <div className="flex items-start gap-3">
+                          <MapPin className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-1 shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs text-slate-500 dark:text-slate-400 mb-1">
+                              Next Trip
+                            </p>
+                            <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">
+                              {nextTrip.destination!}
+                            </p>
+                            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
+                              {new Date(
+                                nextTrip.startDateTime!
+                              ).toLocaleDateString("en-US", {
+                                month: "short",
+                                day: "numeric",
+                              })}
+                            </p>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                    ) : null;
+                  })()
                 ) : (
                   <div className="mb-4 p-4 bg-linear-to-r from-slate-50 to-blue-50 dark:from-slate-800 dark:to-blue-950/20 rounded-2xl border border-slate-200 dark:border-slate-700">
                     <div className="flex items-start gap-3">

@@ -26,9 +26,9 @@ const DashboardSidebarContent = ({
   return (
     <div className="hidden md:flex h-full w-64 flex-col border-r bg-card">
       {/* Logo/Brand */}
-      <div className="flex h-16 items-center border-b px-6">
+      <div className="flex h-17 items-center border-b shadow-lg px-6">
         <Link href={dashboardHome} className="flex items-center space-x-2">
-        <Logo/>
+          <Logo />
         </Link>
       </div>
 

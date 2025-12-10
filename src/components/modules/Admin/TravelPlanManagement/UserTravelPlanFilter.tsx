@@ -18,7 +18,8 @@ const UserTravelPlanFilter = () => {
 
       {/* Row 2: Filter Controls */}
       <div className="flex items-center gap-3">
-        <SearchFilter paramName="visibility" placeholder="visibility" />
+        <SearchFilter paramName="visibility" placeholder="Visibility" />
+        <SearchFilter paramName="travelType" placeholder="Travel Type" />
         {/* Clear All Filters */}
         <ClearFiltersButton />
       </div>

@@ -3,7 +3,8 @@ import { getAllUsers } from "@/services/user/getAllUsers";
 
 
 const ExploreTravelersPage = async () => {
-    const allUsers = await getAllUsers();
+    const allUsers = await getAllUsers('');
+    console.log({allUsers}, 'from explore travelers page')
     return <ExploreTravelers allUsers={allUsers?.data || []} />;
 }
 
