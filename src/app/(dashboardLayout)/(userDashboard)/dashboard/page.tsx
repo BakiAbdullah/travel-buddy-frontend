@@ -5,8 +5,6 @@ const UserDashboardPage = async () => {
 
   const matchedTravelPlans = await getMatchedTravelersForLoggedInUser();
 
-  console.log({matchedTravelPlans});
-
   return <UserMatchedTravelPlan matchedTravelPlans={matchedTravelPlans} />;
 }
 
