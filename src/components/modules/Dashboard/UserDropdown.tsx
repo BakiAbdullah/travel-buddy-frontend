@@ -18,6 +18,7 @@ import Link from "next/link";
 interface UserDropdownProps {
   userInfo: IUserInfo;
 }
+// 
 
 const UserDropdown = ({ userInfo }: UserDropdownProps) => {
   const handleLogout = async () => {
