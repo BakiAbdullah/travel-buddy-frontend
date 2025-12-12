@@ -16,7 +16,10 @@ const UserTravelPlanManagementPage = async ({
   const queryString = queryStringFormatter(searchParamsObj);
   const travelPlansResult = await getMyTravelPlans(queryString);
 
-  console.log({ travelPlansResult });
+  console.log(
+    travelPlansResult,
+    "My travel Plans Result"
+  );
 
   const totalPages = Math.ceil(
     (travelPlansResult?.meta?.total || 1) /

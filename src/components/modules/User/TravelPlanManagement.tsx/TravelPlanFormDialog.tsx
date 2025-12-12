@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import InputFieldError from "@/components/shared/InputFieldError";
 import { Button } from "@/components/ui/button";
 import {
@@ -74,8 +75,9 @@ const TravelPlanFormDialog = ({
                   {isEdit ? "Edit Travel Plan" : "Add Travel Plan"}
                 </h2>
                 <p className="text-sm text-gray-600 mt-0.5">
-                  {isEdit ?"Update your adventure details" : "Add new adventure!" }
-                  
+                  {isEdit
+                    ? "Update your adventure details"
+                    : "Add new adventure!"}
                 </p>
               </div>
             </div>
@@ -225,6 +227,8 @@ const TravelPlanFormDialog = ({
               <InputFieldError field="visibility" state={state} />
             </Field>
 
+          
+
             {/* Itinerary */}
             <Field>
               <FieldLabel
@@ -264,7 +268,11 @@ const TravelPlanFormDialog = ({
               className="px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-xl hover:from-indigo-700 hover:to-purple-700 transition font-medium shadow-lg shadow-indigo-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
               disabled={isPending}
             >
-              {isPending ? "Saving..." : isEdit ? "Save Changes" : "Create Travel Plan"}
+              {isPending
+                ? "Saving..."
+                : isEdit
+                ? "Save Changes"
+                : "Create Travel Plan"}
             </Button>
           </div>
         </form>

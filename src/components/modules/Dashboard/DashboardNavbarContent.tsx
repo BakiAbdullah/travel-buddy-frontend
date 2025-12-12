@@ -21,7 +21,6 @@ const DashboardNavbarContent = ({
   dashboardHome,
 }: DashboardNavbarContentProps) => {
   console.log({ userInfo });
-  console.log({ dashboardHome });
 
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);

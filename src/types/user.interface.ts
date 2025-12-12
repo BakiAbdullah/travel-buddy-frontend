@@ -1,5 +1,6 @@
 import { TUserRole } from "./userRole";
 
+export type TravelRequestType = "ACCEPTED" | "REJECTED" | "CANCELLED";
 export type TravelType = "SOLO" | "FAMILY" | "FRIENDS";
 export type Visibility = "PUBLIC" | "PRIVATE";
 

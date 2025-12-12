@@ -60,6 +60,8 @@ const TravelPlanTable = ({ travelPlans }: TravelPlanTableProps) => {
     }
   };
 
+  console.log(travelPlans, 'from travel table');
+
   return (
     <>
       <ManagementTable

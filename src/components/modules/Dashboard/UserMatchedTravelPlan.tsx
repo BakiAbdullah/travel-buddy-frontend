@@ -21,6 +21,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import RequestToJoinButton from "../User/TravelPlanManagement.tsx/RequestToJoinButton";
 
 export default function UserMatchedTravelPlan({ matchedTravelPlans }:any) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -56,7 +57,7 @@ export default function UserMatchedTravelPlan({ matchedTravelPlans }:any) {
           <div className="flex justify-between items-center gap-3 mb-2">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">
-                Matched Travel Plans
+                Recommended Matches
               </h1>
               <p className="text-gray-600 mt-1">
                 Find your perfect travel companions
@@ -265,13 +266,7 @@ export default function UserMatchedTravelPlan({ matchedTravelPlans }:any) {
                 >
                   View Details
                 </button>
-                <button
-                  onClick={() => handleSendRequest(plan)}
-                  className="flex-1 px-4 py-2 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition font-medium text-sm flex items-center justify-center gap-2"
-                >
-                  <Send className="w-4 h-4" />
-                  Send Request
-                </button>
+                <RequestToJoinButton planId={plan.id} />
               </div>
             </div>
           ))}

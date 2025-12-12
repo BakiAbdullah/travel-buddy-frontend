@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { Column } from "@/components/shared/DashboardComponents/ManagementTable";
@@ -77,6 +78,66 @@ export const travelPlansColumns: Column<ITravelPlan>[] = [
     accessor: (itinerary) => (
       <div className="flex flex-col">
         <span className="text-sm max-w-xs truncate">{itinerary.itinerary}</span>
+      </div>
+    ),
+  },
+  {
+    header: "Travel Requests",
+    accessor: (plan) => (
+      <div className="flex flex-col gap-1">
+        {Array.isArray(plan.travelRequests) &&
+        plan.travelRequests.length > 0 ? (
+          // show up to 3 requests + a count badge
+          <>
+            <div className="flex flex-col gap-1 max-w-xs">
+              {plan.travelRequests.slice(0, 3).map((r: any) => (
+                <div
+                  key={r.id}
+                  className="flex flex-col items-center justify-between gap-1"
+                >
+                  <div className="flex items-center gap-2">
+                    {/* <div className="text-sm font-medium">
+                      {r.requester?.name ??
+                        r.requesterName ??
+                        r.requesterId ??
+                        "Unknown"}
+                    </div> */}
+                    <div className="text-xs text-gray-500">
+                      {/* optional show date */}
+                      {r.createdAt
+                        ? new Date(r.createdAt).toLocaleDateString()
+                        : null}
+                    </div>
+                  </div>
+
+                  <div>
+                    <span
+                      className={`text-xs font-semibold px-2 py-0.5 rounded-full ${
+                        r.status === "PENDING"
+                          ? "bg-yellow-200 border border-yellow-400 text-yellow-800"
+                          : r.status === "ACCEPTED"
+                          ? "bg-green-100 text-green-800"
+                          : r.status === "REJECTED"
+                          ? "bg-red-100 text-red-800"
+                          : "bg-slate-100 text-slate-700"
+                      }`}
+                    >
+                      {r.status}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {plan.travelRequests.length > 3 && (
+              <div className="text-xs text-gray-500 mt-1">
+                +{plan.travelRequests.length - 3} more
+              </div>
+            )}
+          </>
+        ) : (
+          <span className="text-sm text-gray-500">No requests</span>
+        )}
       </div>
     ),
   },
