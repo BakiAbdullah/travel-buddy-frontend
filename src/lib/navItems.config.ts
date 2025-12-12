@@ -46,12 +46,12 @@ export const userNavItems: NavSection[] = [
   },
 
   {
-    title: "Settings",
+    title: "Travel History & Reviews",
     items: [
       {
-        title: "Change Password",
-        href: "/change-password",
-        icon: "Settings", // ✅ String
+        title: "Completed Trip",
+        href: "/dashboard/travel-history",
+        icon: "📓", // ✅ String
         roles: ["USER"],
       },
     ],

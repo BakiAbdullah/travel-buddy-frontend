@@ -32,6 +32,7 @@ export interface ITravelPlan {
   user: IUserInfo;
   destination: string;
   itinerary: string;
+  isCompleted: boolean;
   reviews: string[];
   budgetRange: string; // e.g. "1000 - 1100"
   travelRequests: string[];

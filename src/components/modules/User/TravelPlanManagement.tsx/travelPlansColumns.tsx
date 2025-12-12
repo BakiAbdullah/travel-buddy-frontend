@@ -82,6 +82,23 @@ export const travelPlansColumns: Column<ITravelPlan>[] = [
     ),
   },
   {
+  header: "Trip Status",
+  accessor: (trip) => {
+    const now = new Date();
+    const end = new Date(trip.endDateTime);
+
+    const isCompleted = end < now; // 👈 End date passed = completed
+
+    return (
+      <div className="flex flex-col">
+        <span className={`text-sm border rounded-full px-2  ${isCompleted ? "text-green-600 border-green-300" : "text-yellow-600 border-amber-300"}`}>
+          {isCompleted ? "Completed" : "On Going"}
+        </span>
+      </div>
+    );
+  },
+},
+  {
     header: "Travel Requests",
     accessor: (plan) => (
       <div className="flex flex-col gap-1">

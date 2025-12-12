@@ -1,39 +1,164 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚀 Travel Buddy – Frontend (React + Next.js + TypeScript + Tailwind)
 
-## Getting Started
+Frontend for the Travel Buddy platform: a travel collaboration app where users can browse and create travel plans, send join requests, write reviews, and manage trips.
 
-First, run the development server:
+Built with React, Next.js, TypeScript, Tailwind CSS and common ecosystem libraries.
 
+---
+
+## 📌 Key Features
+
+- Authentication (login, refresh token, protected pages)
+- Role-based UI (Admin & User)
+- Browse / Search / Filter travel plans
+- Create / Edit travel plans (owner only)
+- Send / Manage travel join requests
+- Add / View reviews
+- Responsive UI (mobile-first)
+- Modal-based interactions (shadcn/ui Dialog)
+- API integration via RTK Query (or fetch/axios)
+
+---
+
+## 🛠 Technology Stack
+
+| Technology | Usage |
+|------------|-------|
+| React | UI library |
+| Next.js | Routing & server-side rendering |
+| TypeScript | Type safety |
+| Tailwind CSS | Styling |
+| shadcn/ui | UI components |
+| @shadcn/table | Tables |
+| Next Js + Server Action | State & data fetching |
+| Zod | Form & request validation (optional) |
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+ ├── app/ (Next.js app dir or pages/)
+ ├── components/
+ │    ├── common/
+ │    ├── layout/
+ │    ├── forms/
+ │    ├── modals/
+ │    ├── cards/
+ ├── features/
+ │    ├── auth/
+ │    ├── travelPlans/
+ │    ├── travelRequests/
+ │    ├── reviews/
+ ├── hooks/
+ ├── lib/ (api clients, utils)
+ ├── styles/
+ ├── public/
+next.config.js or app router files
+```
+
+---
+
+## ⚙️ Environment Variables
+
+Create `.env.local` in the project root:
+
+```
+NEXT_PUBLIC_API_BASE_URL="http://localhost:5000/api"
+NEXT_PUBLIC_APP_NAME="Travel Buddy"
+```
+
+> When deploying, set `NEXT_PUBLIC_API_BASE_URL` to your production backend URL.
+
+---
+
+## ▶️ Running Locally
+
+1. Install dependencies
+```bash
+npm install
+# or
+yarn
+```
+
+2. Run the development server
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Build for production
+```bash
+npm run build
+npm run start
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔌 Integrating with Backend
 
-## Learn More
+- Set `NEXT_PUBLIC_API_BASE_URL` to backend endpoint.
+- Auth flow: store access token in memory + refresh with refresh token endpoint (secure httpOnly cookie recommended on production).
+- Use RTK Query / axios with an auth middleware to automatically attach tokens and handle 401 -> refresh flow.
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🧩 UI / Component Notes
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Use `shadcn/ui` Dialog for modals (borrow modal, create plan modal, etc).
+- Use `@tanstack/react-table` for listing plans and actions columns (Borrow button opens modal).
+- Keep forms accessible and validate with Zod or React Hook Form + Zod.
+- Centralize date handling with `date-fns` or `luxon`.
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ✅ Helpful Scripts (package.json)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```json
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "prepare": "husky install"
+  }
+}
+```
+
+---
+
+## 🐛 Common Frontend Issues & Fixes
+
+- **Image import / next/image**: Use correct domains in `next.config.js` for external images.
+- **React key warnings**: Ensure list renders have stable keys (`id`).
+- **API CORS**: Enable CORS on backend for local development or proxy via Next.js rewrites.
+
+---
+
+## 🚀 Deployment
+
+- Vercel (recommended for Next.js) or Netlify:
+  - Set environment variables in the deployment dashboard.
+  - Ensure backend URL is reachable from the deployed frontend.
+- For server-side features (middleware, server actions), prefer Vercel.
+
+---
+
+## 📚 Further Improvements
+
+- Implement server-side rendering or incremental static regeneration for plan lists.
+- Add E2E tests (Cypress / Playwright).
+- Add image uploads (S3 / Cloudinary).
+- Improve accessibility & add i18n.
+
+---
+
+
+
+
 
 
 🌍 Travel Buddy – Frontend (Next.js + TypeScript + Tailwind + Shadcn)
@@ -107,32 +232,7 @@ JWT + Cookies	Auth
 TanStack Query	Data fetching/caching
 Server Actions	Secure server-side mutations
 Zod	Form validation
-🔧 Project Structure
-src/
- ├── app/
- │   ├── (auth)/login/
- │   ├── dashboard/
- │   ├── travel-plans/
- │   ├── profile/
- │   ├── requests/
- │   ├── actions/              # server actions
- │   ├── layout.tsx
- │   └── page.tsx
- │
- ├── components/
- │    ├── RequestToJoinButton/
- │    ├── TravelCard/
- │    ├── Navbar/
- │    ├── Footer/
- │
- ├── hooks/
- │
- ├── lib/
- │    ├── axiosInstance.ts
- │    ├── auth.ts
- │
- ├── types/
- ├── utils/
+
 
 ⚙️ Environment Variables
 
@@ -252,16 +352,6 @@ Backend communication issues?
 
 Set environment variable correctly:
 
-NEXT_PUBLIC_API_BASE_URL=https://travel-buddy-backend.onrender.com/api
+NEXT_PUBLIC_API_BASE_URL=https://travel-buddy-backend.onrender.com/api/v1
 
-📸 Screenshots (Optional)
 
-You can add screenshots later:
-
-/public/screenshots/home.png
-/public/screenshots/travel-details.png
-/public/screenshots/request-sent.png
-
-📝 License
-
-This project is made for educational/assignment use only.
