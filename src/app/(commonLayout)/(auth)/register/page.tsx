@@ -1,4 +1,4 @@
-
+export const dynamic = "force-dynamic";
 import RegisterForm from "@/components/modules/Auth/RegisterForm";
 import {
   Card,

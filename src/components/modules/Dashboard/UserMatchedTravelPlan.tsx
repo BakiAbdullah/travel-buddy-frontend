@@ -40,7 +40,7 @@ export default function UserMatchedTravelPlan({ matchedTravelPlans }:any) {
     setSelectedPlan(plan);
   };
 
-  const filteredPlans = sampleData.filter((plan:any) => {
+  const filteredPlans = sampleData?.filter((plan:any) => {
     const matchesSearch =
       plan.destination.toLowerCase().includes(searchQuery.toLowerCase()) ||
       plan.user.name.toLowerCase().includes(searchQuery.toLowerCase());
@@ -83,7 +83,7 @@ export default function UserMatchedTravelPlan({ matchedTravelPlans }:any) {
                 </p>
               </div>
               <p className="text-2xl font-bold text-gray-900">
-                {sampleData.length}
+                {sampleData?.length}
               </p>
             </div>
             <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
@@ -92,7 +92,7 @@ export default function UserMatchedTravelPlan({ matchedTravelPlans }:any) {
                 <p className="text-xs text-gray-600 font-medium">High Match</p>
               </div>
               <p className="text-2xl font-bold text-gray-900">
-                {sampleData.filter((p: any) => p.matchScore >= 90).length}
+                {sampleData?.filter((p: any) => p.matchScore >= 90).length}
               </p>
             </div>
             <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
@@ -103,7 +103,7 @@ export default function UserMatchedTravelPlan({ matchedTravelPlans }:any) {
                 </p>
               </div>
               <p className="text-2xl font-bold text-gray-900">
-                {sampleData.length}
+                {sampleData?.length}
               </p>
             </div>
             <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-200">
@@ -114,7 +114,7 @@ export default function UserMatchedTravelPlan({ matchedTravelPlans }:any) {
                 </p>
               </div>
               <p className="text-2xl font-bold text-gray-900">
-                {new Set(sampleData.map((p: any) => p.destination)).size}
+                {new Set(sampleData?.map((p: any) => p.destination)).size}
               </p>
             </div>
           </div>
@@ -152,7 +152,7 @@ export default function UserMatchedTravelPlan({ matchedTravelPlans }:any) {
 
         {/* Travel Plans Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {filteredPlans.map((plan: any) => (
+          {filteredPlans?.map((plan: any) => (
             <div
               key={plan.id}
               className="bg-white rounded-2xl shadow-md border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow"
@@ -273,7 +273,7 @@ export default function UserMatchedTravelPlan({ matchedTravelPlans }:any) {
         </div>
 
         {/* Empty State */}
-        {filteredPlans.length === 0 && (
+        {filteredPlans?.length === 0 && (
           <div className="bg-white rounded-2xl shadow-md p-12 text-center">
             <div className="inline-flex p-4 bg-gray-100 rounded-full mb-4">
               <Search className="w-8 h-8 text-gray-400" />
