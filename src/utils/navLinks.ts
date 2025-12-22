@@ -1,10 +1,12 @@
 import {
   InboxIcon,
   LayoutDashboard,
+  PenBox,
   PlaneIcon,
   Search,
   SquareUser,
   User2,
+  UserCircle,
   UserCog
 } from "lucide-react";
 
@@ -17,21 +19,33 @@ export const navigationLinks = [
     allowedRoles: ["COMMON", "USER"],
   },
   {
-    href: "/dashboard/my-travel-plans",
-    label: "My Travel Plans",
-    icon: InboxIcon,
-    allowedRoles: ["USER"],
+    href: "/travel-plans",
+    label: "Travel Plans",
+    icon: Search,
+    allowedRoles: ["COMMON"],
   },
   {
-    href: "/find-travel-buddy",
-    label: "Find Travel Buddy",
-    icon: Search,
+    href: "/about",
+    label: "About",
+    icon: UserCircle,
+    allowedRoles: ["COMMON"],
+  },
+  {
+    href: "/blogs",
+    label: "Blogs",
+    icon: PenBox,
     allowedRoles: ["COMMON"],
   },
   {
     href: "/profile",
     label: "Profile",
     icon: User2,
+    allowedRoles: ["USER"],
+  },
+  {
+    href: "/dashboard/my-travel-plans",
+    label: "My Travel Plans",
+    icon: InboxIcon,
     allowedRoles: ["USER"],
   },
   {
