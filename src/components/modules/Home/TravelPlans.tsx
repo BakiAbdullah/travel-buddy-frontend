@@ -39,9 +39,9 @@ export default function TravelPlans({ allTravelPlans }: any) {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-orange-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-blue-600 to-orange-500 text-white py-16 px-6">
+      <div className="bg-linear-to-r from-indigo-600 to-purple-600 text-white py-16 px-6">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">Travel Plans</h1>
           <p className="text-xl text-blue-50">
@@ -116,7 +116,7 @@ export default function TravelPlans({ allTravelPlans }: any) {
               className="bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
             >
               {/* Card Header */}
-              <div className="relative bg-gradient-to-br from-blue-500 to-orange-500 h-32 p-4 flex items-end">
+              <div className="relative bg-linear-to-br from-blue-500 to-orange-500 h-32 p-4 flex items-end">
                 <div className="absolute top-4 right-4 flex gap-2">
                   {plan.visibility === "PUBLIC" ? (
                     <span className="bg-white bg-opacity-90 text-blue-600 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
@@ -188,7 +188,7 @@ export default function TravelPlans({ allTravelPlans }: any) {
                 <div className="pt-4 border-t border-gray-100">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-400 to-orange-400 rounded-full flex items-center justify-center">
+                      <div className="w-8 h-8 bg-linear-to-br from-blue-400 to-orange-400 rounded-full flex items-center justify-center">
                         <User className="w-4 h-4 text-white" />
                       </div>
                       <div>
@@ -197,7 +197,7 @@ export default function TravelPlans({ allTravelPlans }: any) {
                         </p>
                       </div>
                     </div>
-                    <button className="bg-gradient-to-r from-blue-600 to-orange-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all">
+                    <button className="bg-linear-to-r from-indigo-600 to-purple-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:shadow-lg transition-all">
                       View Details
                     </button>
                   </div>
