@@ -3,37 +3,28 @@
 "use server";
 
 import { serverFetch } from "@/lib/serverFetch";
-import { zodValidator } from "@/lib/zodValidator";
-import {
-  CreateReviewDTO,
-  createReviewSchema
-} from "@/zod/review.validation";
+// import { zodValidator } from "@/lib/zodValidator";
+// import {
+//   CreateReviewDTO,
+//   createReviewSchema
+// } from "@/zod/review.validation";
 
 
 /**
  * Server action - create review
  * Use directly as <form action={createReviewAction}> in client component
  */
-export const createReviewAction = async (formData: FormData) => {
-  const payload: any = {
-    travelPlanId: formData.get("travelPlanId") as string,
-    rating: Number(formData.get("rating")),
-    comment: (formData.get("comment") as string) || "",
-  };
-
-  const validation = zodValidator(payload, createReviewSchema);
-  if (!validation.success) {
-    return {
-      success: false,
-      message: "Validation failed",
-      errors: validation.errors,
-    };
-  }
+export const createReviewAction = async (payload: {
+  travelPlanId: string;
+  targetUserId: string;
+  rating: number;
+  comment: string;
+}) => {
 
   try {
     const res = await serverFetch.post("/reviews", {
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(validation.data as CreateReviewDTO),
+      body: JSON.stringify(payload),
     });
     const json = await res.json();
     return json;

@@ -26,12 +26,12 @@ export function TableSkeleton({
           <TableRow>
             {[...Array(columns)].map((_, i) => (
               <TableHead key={i}>
-                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-full bg-slate-300" />
               </TableHead>
             ))}
             {showActions && (
               <TableHead className="w-[70px]">
-                <Skeleton className="h-4 w-full" />
+                <Skeleton className="h-4 w-full bg-slate-300" />
               </TableHead>
             )}
           </TableRow>
@@ -43,15 +43,15 @@ export function TableSkeleton({
                 <TableCell key={colIndex}>
                   <div className="flex items-center gap-2">
                     {colIndex === 0 && (
-                      <Skeleton className="h-10 w-10 rounded-full" />
+                      <Skeleton className="h-10 w-10 rounded-full bg-slate-300" />
                     )}
-                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-5 w-full bg-slate-300" />
                   </div>
                 </TableCell>
               ))}
               {showActions && (
                 <TableCell>
-                  <Skeleton className="h-8 w-8 rounded-md" />
+                  <Skeleton className="h-5 w-8 rounded-md bg-slate-300" />
                 </TableCell>
               )}
             </TableRow>
