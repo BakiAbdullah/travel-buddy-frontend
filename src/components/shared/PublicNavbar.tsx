@@ -1,3 +1,5 @@
+"use client";
+
 import Logo from "@/assets/Logo";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,152 +19,163 @@ import { IUserInfo } from "@/types/user.interface";
 import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import { navigationLinks } from "@/utils/navLinks";
+import { useEffect, useRef, useState } from "react";
 
-export default async function PublicNavbar() {
-  const userInfo = (await getUserInfo()) as IUserInfo;
+export default function PublicNavbar() {
+  const [userInfo, setUserInfo] = useState<IUserInfo | null>(null);
+  const navRef = useRef<HTMLElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
 
-  console.log(userInfo, "from Navbar")
+  useEffect(() => {
+    // Get user info
+    const fetchUserInfo = async () => {
+      try {
+        const info = await getUserInfo();
+        setUserInfo(info as IUserInfo);
+      } catch (error) {
+        console.log("No user info available");
+      }
+    };
+
+    fetchUserInfo();
+
+    // Simple scroll detection
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const shouldBeScrolled = scrollY > 50;
+      
+      if (shouldBeScrolled !== isScrolled) {
+        setIsScrolled(shouldBeScrolled);
+      }
+    };
+
+    // Initial check
+    handleScroll();
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [isScrolled]);
   
   return (
     <header
-      data-tour="nav"
-      className="border-b px-4 md:px-10 sticky top-0 z-40 bg-background/80 backdrop-blur-xs"
+      ref={navRef}
+      className={`
+        fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out
+        ${isScrolled 
+          ? 'bg-white/95 backdrop-blur-md shadow-lg' 
+          : 'bg-transparent'
+        }
+      `}
     >
-      <div className="flex h-16 items-center justify-between gap-4">
-        {/* Left side */}
-        <div className="flex flex-1 items-center gap-2">
-          {/* Mobile menu trigger */}
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button
-                className="group size-8 md:hidden"
-                variant="ghost"
-                size="icon"
-              >
-                <svg
-                  className="pointer-events-none"
-                  width={16}
-                  height={16}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M4 12L20 12"
-                    className="origin-center -translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-315"
-                  />
-                  <path
-                    d="M4 12H20"
-                    className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
-                  />
-                  <path
-                    d="M4 12H20"
-                    className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-135"
-                  />
-                </svg>
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent align="start" className="w-36 p-1 mt-4 md:hidden">
-              <NavigationMenu className="max-w-none *:w-full">
-                <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
-                  {navigationLinks.map((link, index) => {
-                    const Icon = link.icon;
-
-                    // If no user → treat as COMMON
-                    const currentRole = userInfo?.role || "COMMON";
-
-                    // If this role is NOT allowed → hide
-                    if (!link.allowedRoles.includes(currentRole)) return null;
-
-                    return (
-                      <NavigationMenuItem key={index}>
-                        <NavigationMenuLink
-                          href={link.href}
-                          className="text-foreground hover:text-primary flex-row items-center gap-2 py-1.5 font-medium"
-                        >
-                          <Icon
-                            size={16}
-                            className="text-muted-foreground/80"
-                            aria-hidden="true"
-                          />
-                          <span>{link.label}</span>
-                        </NavigationMenuLink>
-                      </NavigationMenuItem>
-                    );
-                  })}
-                </NavigationMenuList>
-              </NavigationMenu>
-            </PopoverContent>
-          </Popover>
-
+      <div className={`
+        container mx-auto px-6 transition-all duration-500 ease-out
+        ${isScrolled ? 'py-4' : 'py-6'}
+      `}>
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center">
-            <Link href="/" className="text-primary hover:text-primary/90">
-              <Logo />
+          <Link href="/" className="flex items-center">
+            <Logo isScrolled={isScrolled} />
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            <Link 
+              href="/" 
+              className={`
+                px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
+                ${isScrolled 
+                  ? 'text-gray-900 hover:bg-gray-100' 
+                  : 'text-white bg-black/20 backdrop-blur-sm'
+                }
+              `}
+            >
+              Home
             </Link>
-          </div>
-        </div>
-
-        {/* Middle area */}
-        <NavigationMenu className="max-md:hidden">
-          <NavigationMenuList className="gap-2">
-            {navigationLinks.map((link, index) => {
-              const Icon = link.icon;
-
-              // If no user → treat as COMMON
+            {navigationLinks.slice(0, 4).map((link, index) => {
               const currentRole = userInfo?.role || "COMMON";
-
-              // If this role is NOT allowed → hide
               if (!link.allowedRoles.includes(currentRole)) return null;
 
               return (
-                <NavigationMenuItem key={index}>
-                  <NavigationMenuLink
-                    href={link.href}
-                    className="text-foreground hover:text-primary flex-row items-center gap-2 py-1.5 font-medium"
-                  >
-                    <Icon
-                      size={16}
-                      className="text-muted-foreground/80"
-                      aria-hidden="true"
-                    />
-                    <span>{link.label}</span>
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
+                <Link
+                  key={index}
+                  href={link.href}
+                  className={`
+                    text-sm font-medium transition-all duration-300 hover:opacity-80
+                    ${isScrolled ? 'text-gray-700' : 'text-white/90'}
+                  `}
+                >
+                  {link.label}
+                </Link>
               );
             })}
-          </NavigationMenuList>
-        </NavigationMenu>
+          </nav>
 
-        {/* Right side */}
-        <div className="flex items-center gap-2">
-          {/* Login & Logout */}
-          <div className="flex items-center gap-4">
+          {/* CTA Button */}
+          <div className="hidden md:block">
             {userInfo?.email ? (
               <LogoutButton />
             ) : (
-              <div className="flex gap-2">
-                <Button
-                  asChild
-                  size="sm"
-                  className="text-sm text-white cursor-pointer"
-                >
-                  <Link href="/login">Login</Link>
-                </Button>
-                  <Button
-                    variant={"outline"}
-                  asChild
-                  size="sm"
-                  className="text-sm text-slate-900 cursor-pointer"
-                >
-                  <Link href="/register">Register</Link>
-                </Button>
-              </div>
+              <Button
+                asChild
+                className={`
+                  px-6 py-2 rounded-full text-sm font-medium transition-all duration-300
+                  ${isScrolled 
+                    ? 'bg-gray-900 text-white hover:bg-gray-800' 
+                    : 'bg-white/20 text-white backdrop-blur-sm hover:bg-white/30 border border-white/30'
+                  }
+                `}
+              >
+                <Link href="/login">Start Your Journey</Link>
+              </Button>
             )}
+          </div>
+
+          {/* Mobile Menu */}
+          <div className="md:hidden">
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={`
+                    ${isScrolled ? 'text-gray-900' : 'text-white'}
+                  `}
+                >
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                  </svg>
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent align="end" className="w-48 p-2">
+                <div className="space-y-1">
+                  <Link href="/" className="block px-3 py-2 text-sm hover:bg-gray-100 rounded">Home</Link>
+                  {navigationLinks.map((link, index) => {
+                    const currentRole = userInfo?.role || "COMMON";
+                    if (!link.allowedRoles.includes(currentRole)) return null;
+
+                    return (
+                      <Link
+                        key={index}
+                        href={link.href}
+                        className="block px-3 py-2 text-sm hover:bg-gray-100 rounded"
+                      >
+                        {link.label}
+                      </Link>
+                    );
+                  })}
+                  {!userInfo?.email && (
+                    <Link href="/login" className="block px-3 py-2 text-sm font-medium text-blue-600 hover:bg-blue-50 rounded">
+                      Start Your Journey
+                    </Link>
+                  )}
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
       </div>

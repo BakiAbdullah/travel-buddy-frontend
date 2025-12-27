@@ -5,9 +5,11 @@ export const dynamic = "force-dynamic";
 
 const CommonLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <div className="min-h-screen">
       <PublicNavbar />
-      {children}
+      <main className="relative">
+        {children}
+      </main>
       <Footer />
     </div>
   );

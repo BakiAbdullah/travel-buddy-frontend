@@ -3,7 +3,12 @@
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Field, FieldDescription, FieldGroup, FieldLabel } from "@/components/ui/field";
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+} from "@/components/ui/field";
 import InputFieldError from "@/components/shared/InputFieldError";
 import { useActionState, useEffect, useState } from "react";
 import { loginUser } from "@/services/auth/loginUser";
@@ -21,8 +26,8 @@ const DEMO_CREDENTIALS = {
 
 const LoginForm = ({ redirect }: { redirect?: string }) => {
   const [state, formAction, isPending] = useActionState(loginUser, null);
-   const [email, setEmail] = useState("");
-   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (state && !state.success && state.message) {
@@ -30,10 +35,10 @@ const LoginForm = ({ redirect }: { redirect?: string }) => {
     }
   }, [state]);
 
-   const fillDemoCredentials = (role: "admin" | "user") => {
-     setEmail(DEMO_CREDENTIALS[role].email);
-     setPassword(DEMO_CREDENTIALS[role].password);
-   };
+  const fillDemoCredentials = (role: "admin" | "user") => {
+    setEmail(DEMO_CREDENTIALS[role].email);
+    setPassword(DEMO_CREDENTIALS[role].password);
+  };
 
   return (
     <form action={formAction}>

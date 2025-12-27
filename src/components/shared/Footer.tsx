@@ -1,29 +1,148 @@
+'use client';
+
 import Logo from "@/assets/Logo";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
+  const footerRef = useRef<HTMLElement>(null);
+  const logoRef = useRef<HTMLDivElement>(null);
+  const socialLinksRef = useRef<HTMLUListElement>(null);
+  const linksContainerRef = useRef<HTMLDivElement>(null);
+  const copyrightRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const footer = footerRef.current;
+    const logo = logoRef.current;
+    const socialLinks = socialLinksRef.current;
+    const linksContainer = linksContainerRef.current;
+    const copyright = copyrightRef.current;
+
+    if (!footer || !logo || !socialLinks || !linksContainer || !copyright) return;
+
+    // Set initial states
+    gsap.set([logo, socialLinks], { opacity: 0, y: 30 });
+    gsap.set(linksContainer.children, { opacity: 0, y: 20 });
+    gsap.set(copyright, { opacity: 0 });
+
+    // Create main timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: footer,
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none reverse"
+      }
+    });
+
+    // Animate logo and description
+    tl.to(logo, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.out"
+    })
+    // Animate social links with stagger
+    .to(socialLinks.children, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: "power2.out"
+    }, "-=0.4")
+    // Animate footer links columns
+    .to(linksContainer.children, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.15,
+      ease: "power2.out"
+    }, "-=0.3")
+    // Animate copyright
+    .to(copyright, {
+      opacity: 1,
+      duration: 0.5,
+      ease: "power2.out"
+    }, "-=0.2");
+
+    // Add floating animation for background elements
+    gsap.to(".floating-element", {
+      y: -10,
+      duration: 2,
+      ease: "power1.inOut",
+      yoyo: true,
+      repeat: -1,
+      stagger: 0.5
+    });
+
+    // Add hover animations for social links
+    const socialIcons = socialLinks.querySelectorAll('a');
+    socialIcons.forEach((icon) => {
+      icon.addEventListener('mouseenter', () => {
+        gsap.to(icon, { scale: 1.2, duration: 0.3, ease: "power2.out" });
+      });
+      icon.addEventListener('mouseleave', () => {
+        gsap.to(icon, { scale: 1, duration: 0.3, ease: "power2.out" });
+      });
+    });
+
+    // Cleanup
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
   return (
-    <footer>
-      <div className="mx-auto container space-y-8 px-4 py-16 ">
+    <footer 
+      ref={footerRef}
+      className="relative footer-background overflow-hidden"
+    >
+      {/* Background pattern overlay with animated elements */}
+      <div 
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%), 
+                           radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 0%, transparent 50%),
+                           linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.02) 50%, transparent 60%)`
+        }}
+      ></div>
+      
+      {/* Animated floating elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="floating-element footer-floating-element absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400/20 rounded-full"></div>
+        <div className="floating-element footer-floating-element absolute top-3/4 right-1/4 w-1 h-1 bg-cyan-400/30 rounded-full"></div>
+        <div className="floating-element footer-floating-element absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-pink-400/20 rounded-full"></div>
+        <div className="floating-element footer-floating-element absolute top-1/3 right-1/3 w-1 h-1 bg-purple-400/25 rounded-full"></div>
+      </div>
+      
+      {/* Dark overlay */}
+      <div className="absolute inset-0 bg-black/60"></div>
+      
+      {/* Content */}
+      <div className="relative mx-auto container space-y-8 px-4 py-16 text-white">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          <div>
+          <div ref={logoRef}>
             {/* Logo */}
             <Logo />
-            <p className="mt-4 max-w-xs text-muted-foreground/90">
-              Pay, transfer, and manage your money effortlessly. Secure, fast,
-              and always at your fingertips.
+            <p className="mt-4 max-w-xs text-gray-300">
+              Discover amazing destinations, plan unforgettable trips, and create 
+              memories that last a lifetime with your trusted travel companion.
             </p>
 
-            <ul className="mt-8 flex gap-6">
+            <ul ref={socialLinksRef} className="mt-8 flex gap-6">
               <li>
                 <Link
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-blue-500 transition hover:opacity-75"
+                  className="footer-social-icon text-blue-500 transition duration-200"
                 >
                   <span className="sr-only">Facebook</span>
-
                   <svg
                     className="size-6"
                     fill="currentColor"
@@ -44,10 +163,9 @@ const Footer = () => {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-pink-500 transition hover:opacity-75"
+                  className="footer-social-icon text-pink-500 transition duration-200"
                 >
                   <span className="sr-only">Instagram</span>
-
                   <svg
                     className="size-6"
                     fill="currentColor"
@@ -68,10 +186,9 @@ const Footer = () => {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-cyan-500 transition hover:opacity-75"
+                  className="footer-social-icon text-cyan-500 transition duration-200"
                 >
                   <span className="sr-only">Twitter</span>
-
                   <svg
                     className="size-6"
                     fill="currentColor"
@@ -88,21 +205,16 @@ const Footer = () => {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-slate-700 transition hover:opacity-75"
+                  className="footer-social-icon text-gray-400 transition hover:text-white duration-200"
                 >
-                  <span className="sr-only">GitHub</span>
-
+                  <span className="sr-only">YouTube</span>
                   <svg
                     className="size-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                      clipRule="evenodd"
-                    />
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                   </svg>
                 </Link>
               </li>
@@ -112,186 +224,170 @@ const Footer = () => {
                   href="#"
                   rel="noreferrer"
                   target="_blank"
-                  className="text-red-500 transition hover:opacity-75"
+                  className="footer-social-icon text-red-500 transition duration-200"
                 >
-                  <span className="sr-only">Dribbble</span>
-
+                  <span className="sr-only">Pinterest</span>
                   <svg
                     className="size-6"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
-                    <path
-                      fillRule="evenodd"
-                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10c5.51 0 10-4.48 10-10S17.51 2 12 2zm6.605 4.61a8.502 8.502 0 011.93 5.314c-.281-.054-3.101-.629-5.943-.271-.065-.141-.12-.293-.184-.445a25.416 25.416 0 00-.564-1.236c3.145-1.28 4.577-3.124 4.761-3.362zM12 3.475c2.17 0 4.154.813 5.662 2.148-.152.216-1.443 1.941-4.48 3.08-1.399-2.57-2.95-4.675-3.189-5A8.687 8.687 0 0112 3.475zm-3.633.803a53.896 53.896 0 013.167 4.935c-3.992 1.063-7.517 1.04-7.896 1.04a8.581 8.581 0 014.729-5.975zM3.453 12.01v-.26c.37.01 4.512.065 8.775-1.215.25.477.477.965.694 1.453-.109.033-.228.065-.336.098-4.404 1.42-6.747 5.303-6.942 5.629a8.522 8.522 0 01-2.19-5.705zM12 20.547a8.482 8.482 0 01-5.239-1.8c.152-.315 1.888-3.656 6.703-5.337.022-.01.033-.01.054-.022a35.318 35.318 0 011.823 6.475 8.4 8.4 0 01-3.341.684zm4.761-1.465c-.086-.52-.542-3.015-1.659-6.084 2.679-.423 5.022.271 5.314.369a8.468 8.468 0 01-3.655 5.715z"
-                      clipRule="evenodd"
-                    />
+                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z"/>
                   </svg>
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
+          <div ref={linksContainerRef} className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
             <div>
-              <p className="font-medium text-muted-foreground">Services</p>
-
-              <ul className="mt-6 space-y-4 text-sm">
+              <p className="footer-section-title font-medium text-gray-200 mb-6">Services</p>
+              <ul className="space-y-4 text-sm">
                 <li>
                   <Link
                     href="#"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    {" "}
-                    Company Review{" "}
+                    Trip Planning
                   </Link>
                 </li>
-
                 <li>
                   <Link
                     href="#"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    {" "}
-                    Accounts Review{" "}
+                    Hotel Booking
                   </Link>
                 </li>
-
                 <li>
                   <Link
                     href="#"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    {" "}
-                    HR Consulting{" "}
+                    Flight Reservations
                   </Link>
                 </li>
-
                 <li>
                   <Link
                     href="#"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    {" "}
-                    SEO Optimisation{" "}
+                    Travel Insurance
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <p className="font-medium text-muted-foreground">Company</p>
-
-              <ul className="mt-6 space-y-4 text-sm">
-                <li>
-                  <Link
-                    href="/about"
-                    className="text-muted-foreground transition hover:opacity-75"
-                  >
-                    {" "}
-                    About{" "}
-                  </Link>
-                </li>
-
+              <p className="footer-section-title font-medium text-gray-200 mb-6">Destinations</p>
+              <ul className="space-y-4 text-sm">
                 <li>
                   <Link
                     href="#"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    {" "}
-                    Meet the Team{" "}
+                    Popular Places
                   </Link>
                 </li>
-
                 <li>
                   <Link
                     href="#"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    {" "}
-                    Accounts Review{" "}
+                    Beach Destinations
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
+                  >
+                    Mountain Retreats
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
+                  >
+                    City Adventures
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <p className="font-medium text-muted-foreground">Helpful Links</p>
-
-              <ul className="mt-6 space-y-4 text-sm">
+              <p className="footer-section-title font-medium text-gray-200 mb-6">Support</p>
+              <ul className="space-y-4 text-sm">
                 <li>
                   <Link
                     href="/contact"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    {" "}
-                    Contact{" "}
+                    Contact Us
                   </Link>
                 </li>
-
                 <li>
                   <Link
                     href="/faq"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    {" "}
-                    FAQs{" "}
+                    Travel FAQs
                   </Link>
                 </li>
-
                 <li>
                   <Link
                     href="#"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    {" "}
-                    Live Chat{" "}
+                    24/7 Help Center
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="#"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
+                  >
+                    Travel Guides
                   </Link>
                 </li>
               </ul>
             </div>
 
             <div>
-              <p className="font-medium text-muted-foreground">Legal</p>
-
-              <ul className="mt-6 space-y-4 text-sm">
+              <p className="footer-section-title font-medium text-gray-200 mb-6">Company</p>
+              <ul className="space-y-4 text-sm">
                 <li>
                   <Link
-                    href="#"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    href="/about"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    {" "}
-                    Accessibility{" "}
+                    About Travel Buddy
                   </Link>
                 </li>
-
                 <li>
                   <Link
                     href="#"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    {" "}
-                    Returns Policy{" "}
+                    Our Story
                   </Link>
                 </li>
-
                 <li>
                   <Link
                     href="#"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    {" "}
-                    Refund Policy{" "}
+                    Privacy Policy
                   </Link>
                 </li>
-
                 <li>
                   <Link
                     href="#"
-                    className="text-muted-foreground transition hover:opacity-75"
+                    className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    Hiring-3 Statistics
+                    Terms of Service
                   </Link>
                 </li>
               </ul>
@@ -299,7 +395,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <p className="text-xs text-gray-500">
+        <p ref={copyrightRef} className="footer-copyright text-xs text-gray-400 pt-8 border-t border-gray-700">
           &copy; 2025. Travel Buddy. All rights reserved.
         </p>
       </div>

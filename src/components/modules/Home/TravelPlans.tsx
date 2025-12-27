@@ -110,13 +110,13 @@ export default function TravelPlans({ allTravelPlans }: any) {
 
         {/* Travel Plans Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredPlans.map((plan:any) => (
+          {filteredPlans.map((plan: any) => (
             <div
               key={plan.id}
               className="bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 overflow-hidden"
             >
               {/* Card Header */}
-              <div className="relative bg-linear-to-br from-blue-500 to-orange-500 h-32 p-4 flex items-end">
+              <div className="relative bg-linear-to-br from-indigo-600 to-purple-600 h-32 p-4 flex items-end">
                 <div className="absolute top-4 right-4 flex gap-2">
                   {plan.visibility === "PUBLIC" ? (
                     <span className="bg-white bg-opacity-90 text-blue-600 px-3 py-1 rounded-full text-xs font-medium flex items-center gap-1">
@@ -207,7 +207,7 @@ export default function TravelPlans({ allTravelPlans }: any) {
           ))}
         </div>
 
-        {/* No Results */}
+        {/* No Results / Empty state */}
         {filteredPlans.length === 0 && (
           <div className="text-center py-16">
             <MapPin className="w-16 h-16 text-gray-300 mx-auto mb-4" />
