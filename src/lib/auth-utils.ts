@@ -17,10 +17,6 @@ export const commonProtectedRoutes: RouteConfig = {
     patterns: [], // [/password/change-password, /password/reset-password => /password/*]
 }
 
-// export const doctorProtectedRoutes: RouteConfig = {
-//     patterns: [/^\/doctor/], // Routes starting with /doctor/* , /assitants, /appointments/*
-//     exact: [], // "/assistants"
-// }
 
 export const adminProtectedRoutes: RouteConfig = {
     patterns: [/^\/admin/], // Routes starting with /admin/*

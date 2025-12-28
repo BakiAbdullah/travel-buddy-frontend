@@ -55,7 +55,6 @@ export async function proxy(request: NextRequest) {
   }
 
   const routerOwner = getRouteOwner(pathname);
-  //path = /doctor/appointments => "DOCTOR"
   //path = /profile => "COMMON"
   //path = /login => null
 

@@ -134,24 +134,26 @@ const PopularPlaces = () => {
         <div className="max-w-4xl mb-16">
           <div ref={titleRef}>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
-              The Journey Of<br />
+              The Journey Of
+              <br />
               Popular Destinations
             </h2>
           </div>
-          
+
           <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
             <p
               ref={descriptionRef}
               className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl"
             >
-              This journey offers an unforgettable experience that blends adventure, culture, and natural beauty. 
-              Located in breathtaking destinations around the world.
+              This journey offers an unforgettable experience that blends
+              adventure, culture, and natural beauty. Located in breathtaking
+              destinations around the world.
             </p>
-            
+
             <div ref={buttonsRef} className="flex gap-4 flex-shrink-0">
-              <Button 
-                variant="outline" 
-                className="px-6 py-3 rounded-full border-gray-300 text-gray-700 hover:bg-gray-100"
+              <Button
+                variant="outline"
+                className="px-6 py-3 rounded-full border-gray-300 text-gray-600 hover:bg-gray-100"
               >
                 Reminder me
               </Button>
@@ -174,21 +176,28 @@ const PopularPlaces = () => {
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              
+
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-8 z-20">
                 <div className="mb-4">
                   <span className="inline-block px-3 py-1 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-3">
                     {places[0].category}
                   </span>
-                  <p className="text-white/80 text-sm font-medium mb-2">{places[0].subtitle}</p>
-                  <h3 className="text-white text-2xl lg:text-3xl font-bold">{places[0].title}</h3>
+                  <p className="text-white/80 text-sm font-medium mb-2">
+                    {places[0].subtitle}
+                  </p>
+                  <h3 className="text-white text-2xl lg:text-3xl font-bold">
+                    {places[0].title}
+                  </h3>
                 </div>
-                
+
                 {/* Avatars */}
                 <div className="flex -space-x-2">
                   {places[0].avatars?.map((avatar, index) => (
-                    <div key={index} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden">
+                    <div
+                      key={index}
+                      className="w-10 h-10 rounded-full border-2 border-white overflow-hidden"
+                    >
                       <Image
                         src={avatar}
                         alt={`Traveler ${index + 1}`}
@@ -213,18 +222,25 @@ const PopularPlaces = () => {
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              
+
               {/* Content */}
               <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                <p className="text-white/80 text-sm font-medium mb-2">{places[1].subtitle}</p>
-                <h3 className="text-white text-xl lg:text-2xl font-bold">{places[1].title}</h3>
+                <p className="text-white/80 text-sm font-medium mb-2">
+                  {places[1].subtitle}
+                </p>
+                <h3 className="text-white text-xl lg:text-2xl font-bold">
+                  {places[1].title}
+                </h3>
               </div>
             </div>
           </div>
 
           {/* Small Cards */}
           {places.slice(2).map((place, index) => (
-            <div key={place.id} className="place-card lg:col-span-4 relative group cursor-pointer">
+            <div
+              key={place.id}
+              className="place-card lg:col-span-4 relative group cursor-pointer"
+            >
               <div className="relative h-[300px] rounded-3xl overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent z-10"></div>
                 <Image
@@ -233,20 +249,28 @@ const PopularPlaces = () => {
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                
+
                 {/* Play Button */}
                 <div className="absolute top-4 right-4 z-20">
                   <div className="w-10 h-10 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center">
-                    <svg className="w-4 h-4 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z"/>
+                    <svg
+                      className="w-4 h-4 text-white ml-0.5"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M8 5v14l11-7z" />
                     </svg>
                   </div>
                 </div>
-                
+
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                  <p className="text-white/80 text-sm font-medium mb-2">{place.subtitle}</p>
-                  <h3 className="text-white text-lg lg:text-xl font-bold">{place.title}</h3>
+                  <p className="text-white/80 text-sm font-medium mb-2">
+                    {place.subtitle}
+                  </p>
+                  <h3 className="text-white text-lg lg:text-xl font-bold">
+                    {place.title}
+                  </h3>
                 </div>
               </div>
             </div>

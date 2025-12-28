@@ -1,97 +1,161 @@
-"use client";
+'use client';
 
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
   Users,
-  ShieldCheck,
-  MapPin,
-  Handshake,
-  Sparkles,
-  Compass,
+  Shield,
+  Zap,
+  Headphones
 } from "lucide-react";
 
-export default function WhyChooseUs() {
+// Register GSAP plugins
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const WhyChooseUs = () => {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLDivElement>(null);
+  const descriptionRef = useRef<HTMLParagraphElement>(null);
+  const featuresRef = useRef<HTMLDivElement>(null);
+
   const features = [
     {
-      title: "Verified Travel Buddies",
-      description:
-        "Every traveler goes through identity & background verification to ensure a safe experience.",
-      icon: ShieldCheck,
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      title: "Find Perfect Matching Buddies",
-      description:
-        "Our smart algorithm matches you with travelers who share similar interests, budget, and travel style.",
       icon: Users,
-      color: "from-purple-500 to-pink-500",
-    },
-
-    {
-      title: "Smart Destination Suggestions",
-      description:
-        "AI-powered recommendations based on season, budget, popularity, and your preferences.",
-      icon: Sparkles,
-      color: "from-orange-500 to-yellow-500",
+      title: "50K+ Active Users",
+      description: "Join our thriving community of verified travelers from around the world, ready to share amazing adventures."
     },
     {
-      title: "Plan Together, Travel Together",
-      description:
-        "Coordinate trips, share expenses, track progress — all in one place with real-time collaboration.",
-      icon: Handshake,
-      color: "from-green-500 to-teal-500",
+      icon: Shield,
+      title: "100% Safe & Verified",
+      description: "Every travel buddy goes through our comprehensive verification process ensuring your safety and peace of mind."
     },
     {
-      title: "Safe Journey Tracking",
-      description:
-        "Share live trip updates with your family or friends for full peace of mind.",
-      icon: MapPin,
-      color: "from-orange-500 to-red-500",
+      icon: Zap,
+      title: "Instant Matching",
+      description: "Our smart algorithm instantly connects you with compatible travel companions based on your interests and preferences."
     },
     {
-      title: "Explore With Confidence",
-      description:
-        "Discover hidden gems, local guides, and curated travel plans for unforgettable experiences.",
-      icon: Compass,
-      color: "from-green-500 to-emerald-500",
-    },
+      icon: Headphones,
+      title: "24/7 Travel Support",
+      description: "Get round-the-clock assistance from our dedicated support team throughout your entire travel journey."
+    }
   ];
 
-  return (
-    <section className="w-full py-20 px-6 md:px-16 bg-linear-to-b from-background to-muted/30">
-      <div className="max-w-5xl mx-auto text-center space-y-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary">
-          Why Choose <span className="text-foreground">Travel Buddy?</span>
-        </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
-          We make travel safer, smarter, and more enjoyable — with features
-          built for modern explorers looking to connect with people and discover
-          new adventures.
-        </p>
-      </div>
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Initial setup - hide elements
+      gsap.set([titleRef.current, descriptionRef.current], {
+        opacity: 0,
+        y: 30
+      });
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-8 mt-16 max-w-7xl mx-auto">
-        {features.map((item, index) => {
-          const Icon = item.icon;
-          return (
-            <div
-              key={index}
-              className="p-6 backdrop-blur-xl cursor-pointer rounded-2xl bg-card border shadow-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
-            >
-              <div
-                className={`flex items-center justify-center bg-linear-to-r ${item.color} h-12 w-12 rounded-full text-white mb-4 mx-auto`}
-              >
-                {Icon && <Icon size={24} />}
-              </div>
-              <h3 className="text-lg font-bold text-slate-800 mb-2 text-center">
-                {item.title}
-              </h3>
-              <p className="text-sm text-muted-foreground text-center">
-                {item.description}
-              </p>
+      gsap.set(".feature-item", {
+        opacity: 0,
+        y: 50
+      });
+
+      // Main timeline
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 80%",
+          end: "bottom 20%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Animate title and description
+      tl.to(titleRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out"
+      })
+      .to(descriptionRef.current, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        ease: "power3.out"
+      }, "-=0.4")
+      // Animate feature items with stagger
+      .to(".feature-item", {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        stagger: 0.15
+      }, "-=0.2");
+
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <div ref={sectionRef} className="py-28 bg-white">
+      <div className="container mx-auto px-6">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <div ref={titleRef}>
+            {/* Badge */}
+            <div className="inline-flex items-center px-4 py-2 bg-gray-100 rounded-full text-sm text-gray-600 font-medium mb-8">
+              WHY CHOOSE TRAVEL BUDDY
             </div>
-          );
-        })}
+
+            {/* Main Title */}
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+              Your Trusted Travel
+              <br />
+              Companion Platform
+            </h2>
+          </div>
+
+          <p
+            ref={descriptionRef}
+            className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto"
+          >
+            Connect with verified travel companions, explore amazing destinations safely, 
+            and create unforgettable memories with like-minded adventurers from around the world.
+          </p>
+        </div>
+
+        {/* Features Section */}
+        <div
+          ref={featuresRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 max-w-6xl mx-auto"
+        >
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+            return (
+              <div key={index} className="feature-item text-center">
+                <div className="mb-6">
+                  <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto">
+                    <Icon
+                      className="w-12 h-12 text-gray-600"
+                      strokeWidth={1.5}
+                    />
+                  </div>
+                </div>
+
+                {/* Title */}
+                <h3 className="text-xl font-bold text-gray-700 mb-4">
+                  {feature.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-gray-600 text-base md:text-xl leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default WhyChooseUs;

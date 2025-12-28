@@ -1365,3 +1365,617 @@ html {
     background: rgba(0, 0, 0, 0.8);
   }
 }
+/* Professional Why Choose Us Component Animations */
+@keyframes why-choose-float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes why-choose-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes why-choose-gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes why-choose-card-glow {
+  0%, 100% {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 20px 60px rgba(59, 130, 246, 0.15);
+  }
+}
+
+@keyframes why-choose-icon-bounce {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-5px) rotate(2deg);
+  }
+  75% {
+    transform: translateY(-2px) rotate(-1deg);
+  }
+}
+
+@keyframes why-choose-text-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes why-choose-stats-counter {
+  from {
+    opacity: 0;
+    transform: scale(0.5) rotate(-10deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+/* Why Choose Us specific styles */
+.why-choose-feature-card {
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.why-choose-feature-card:hover {
+  animation: why-choose-card-glow 2s ease-in-out infinite;
+}
+
+.why-choose-feature-card:hover .feature-icon {
+  animation: why-choose-icon-bounce 0.6s ease-in-out;
+}
+
+.why-choose-stats-item {
+  animation: why-choose-stats-counter 0.8s ease-out;
+}
+
+.why-choose-stats-item:nth-child(1) { animation-delay: 0s; }
+.why-choose-stats-item:nth-child(2) { animation-delay: 0.1s; }
+.why-choose-stats-item:nth-child(3) { animation-delay: 0.2s; }
+.why-choose-stats-item:nth-child(4) { animation-delay: 0.3s; }
+
+.why-choose-floating-bg {
+  animation: why-choose-float 8s ease-in-out infinite;
+}
+
+.why-choose-floating-bg:nth-child(2) {
+  animation-delay: -2s;
+  animation-duration: 10s;
+}
+
+.why-choose-floating-bg:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 12s;
+}
+
+/* Gradient text animation */
+.why-choose-gradient-text {
+  background-size: 300% 300%;
+  animation: why-choose-gradient-shift 6s ease infinite;
+}
+
+/* Professional card hover effects */
+.why-choose-professional-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.why-choose-professional-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.8s;
+}
+
+.why-choose-professional-card:hover::before {
+  left: 100%;
+}
+
+/* Testimonial card animations */
+.why-choose-testimonial {
+  transition: all 0.3s ease;
+}
+
+.why-choose-testimonial:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Icon container effects */
+.why-choose-icon-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.why-choose-icon-container::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
+}
+
+.why-choose-icon-container:hover::after {
+  width: 100%;
+  height: 100%;
+}
+
+/* Badge animations */
+.why-choose-badge {
+  animation: why-choose-pulse 3s ease-in-out infinite;
+}
+
+/* Responsive enhancements */
+@media (max-width: 768px) {
+  .why-choose-feature-card {
+    transform: none;
+  }
+  
+  .why-choose-feature-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .why-choose-floating-bg {
+    animation-duration: 6s;
+  }
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .why-choose-feature-card {
+    border: 2px solid #000;
+  }
+  
+  .why-choose-gradient-text {
+    background: #000;
+    color: #fff;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .why-choose-feature-card,
+  .why-choose-stats-item,
+  .why-choose-floating-bg,
+  .why-choose-gradient-text,
+  .why-choose-testimonial {
+    animation: none;
+    transition: none;
+  }
+  
+  .why-choose-feature-card:hover {
+    transform: none;
+  }
+}
+
+/* Print styles */
+@media print {
+  .why-choose-feature-card,
+  .why-choose-floating-bg {
+    animation: none;
+    transform: none;
+    box-shadow: none;
+  }
+  
+  .why-choose-gradient-text {
+    background: #000;
+    color: #000;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+  }
+}
+/* Enhanced Testimonials Slider Animations */
+@keyframes testimonial-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes testimonial-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes testimonial-avatar-bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.05);
+  }
+}
+
+@keyframes testimonial-dot-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+@keyframes testimonial-button-glow {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    box-shadow: 0 8px 30px rgba(59, 130, 246, 0.3);
+  }
+}
+
+@keyframes testimonial-progress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Testimonials slider specific styles */
+.testimonial-slider-track {
+  transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.testimonial-card {
+  animation: testimonial-slide-in 0.8s ease-out;
+}
+
+.testimonial-avatar {
+  transition: all 0.3s ease;
+}
+
+.testimonial-avatar:hover {
+  animation: testimonial-avatar-bounce 0.6s ease-in-out;
+}
+
+.testimonial-nav-button {
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.testimonial-nav-button:hover {
+  animation: testimonial-button-glow 2s ease-in-out infinite;
+}
+
+.testimonial-dot {
+  transition: all 0.3s ease;
+}
+
+.testimonial-dot.active {
+  animation: testimonial-dot-pulse 2s ease-in-out infinite;
+}
+
+.testimonial-content {
+  animation: testimonial-fade-in 1s ease-out 0.3s both;
+}
+
+.testimonial-image {
+  transition: transform 0.7s ease;
+}
+
+.testimonial-image:hover {
+  transform: scale(1.05);
+}
+
+/* Auto-play progress indicator */
+.testimonial-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+  border-radius: 2px;
+  animation: testimonial-progress 5s linear infinite;
+}
+
+/* Responsive testimonials */
+@media (max-width: 768px) {
+  .testimonial-slider-track {
+    transition: transform 0.5s ease;
+  }
+  
+  .testimonial-nav-button {
+    padding: 12px;
+  }
+  
+  .testimonial-avatar {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Reduced motion preferences for testimonials */
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-slider-track,
+  .testimonial-card,
+  .testimonial-avatar,
+  .testimonial-nav-button,
+  .testimonial-dot,
+  .testimonial-content,
+  .testimonial-image {
+    animation: none;
+    transition: none;
+  }
+  
+  .testimonial-progress {
+    animation: none;
+  }
+}
+
+/* High contrast mode for testimonials */
+@media (prefers-contrast: high) {
+  .testimonial-nav-button {
+    background: #000;
+    color: #fff;
+    border: 2px solid #fff;
+  }
+  
+  .testimonial-dot {
+    border: 2px solid #000;
+  }
+  
+  .testimonial-dot.active {
+    background: #000;
+  }
+}
+/* Creative Testimonials Carousel Enhancements */
+@keyframes testimonial-hero-float {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+@keyframes testimonial-avatar-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(147, 51, 234, 0.5), 0 0 60px rgba(59, 130, 246, 0.3);
+  }
+}
+
+@keyframes testimonial-text-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes testimonial-connection-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.2);
+  }
+}
+
+@keyframes testimonial-decorative-float {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  33% {
+    transform: translate(10px, -10px) rotate(120deg);
+  }
+  66% {
+    transform: translate(-5px, 5px) rotate(240deg);
+  }
+}
+
+/* Creative testimonials specific styles */
+.testimonial-hero-layout {
+  animation: testimonial-hero-float 8s ease-in-out infinite;
+}
+
+.testimonial-avatar-main {
+  animation: testimonial-avatar-glow 4s ease-in-out infinite;
+}
+
+.testimonial-content-reveal {
+  animation: testimonial-text-reveal 1.2s ease-out 0.5s both;
+}
+
+.testimonial-connection-line {
+  animation: testimonial-connection-pulse 3s ease-in-out infinite;
+}
+
+.testimonial-decorative {
+  animation: testimonial-decorative-float 12s ease-in-out infinite;
+}
+
+.testimonial-decorative:nth-child(2) {
+  animation-delay: -4s;
+  animation-duration: 15s;
+}
+
+.testimonial-decorative:nth-child(3) {
+  animation-delay: -8s;
+  animation-duration: 10s;
+}
+
+/* Enhanced glass morphism for creative layout */
+.testimonial-glass-creative {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* Enhanced dot indicators */
+.testimonial-dot-enhanced {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-dot-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+}
+
+.testimonial-dot-enhanced:hover::before {
+  width: 200%;
+  height: 200%;
+}
+
+/* Progress bar enhancements */
+.testimonial-progress-enhanced {
+  position: relative;
+  overflow: hidden;
+}
+
+.testimonial-progress-enhanced::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: testimonial-progress-shine 2s ease-in-out infinite;
+}
+
+@keyframes testimonial-progress-shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Responsive enhancements for creative layout */
+@media (max-width: 1024px) {
+  .testimonial-hero-layout {
+    min-height: 600px;
+  }
+  
+  .testimonial-avatar-main .w-32 {
+    width: 6rem;
+    height: 6rem;
+  }
+  
+  .testimonial-avatar-main .w-24 {
+    width: 5rem;
+    height: 5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonial-hero-layout {
+    min-height: 500px;
+  }
+  
+  .testimonial-content-reveal h2 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+  
+  .testimonial-content-reveal p {
+    font-size: 1.125rem;
+  }
+}
+
+/* Dark mode enhancements for creative testimonials */
+@media (prefers-color-scheme: dark) {
+  .testimonial-glass-creative {
+    background: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Reduced motion for creative testimonials */
+@media (prefers-reduced-motion: reduce) {
+  .testimonial-hero-layout,
+  .testimonial-avatar-main,
+  .testimonial-content-reveal,
+  .testimonial-connection-line,
+  .testimonial-decorative {
+    animation: none;
+  }
+  
+  .testimonial-progress-enhanced::after {
+    animation: none;
+  }
+}

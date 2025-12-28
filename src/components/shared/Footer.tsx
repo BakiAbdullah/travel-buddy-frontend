@@ -124,7 +124,7 @@ const Footer = () => {
       <div className="absolute inset-0 bg-black/60"></div>
       
       {/* Content */}
-      <div className="relative mx-auto container space-y-8 px-4 py-16 text-white">
+      <div className="relative mx-auto container space-y-8 px-6 py-16 text-white">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div ref={logoRef}>
             {/* Logo */}
