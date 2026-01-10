@@ -3,12 +3,6 @@
 import Logo from "@/assets/Logo";
 import { Button } from "@/components/ui/button";
 import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-} from "@/components/ui/navigation-menu";
-import {
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -20,11 +14,30 @@ import Link from "next/link";
 import LogoutButton from "./LogoutButton";
 import { navigationLinks } from "@/utils/navLinks";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function PublicNavbar() {
   const [userInfo, setUserInfo] = useState<IUserInfo | null>(null);
   const navRef = useRef<HTMLElement>(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+
+  // Pages with a light navbar background from the start
+  const lightBackgroundPages = [
+    '/explore-travelers',
+    '/dashboard',
+    '/profile',
+    '/travel-plans',
+    '/matched-travel-plans',
+    '/about',
+    '/blogs',
+    '/login',
+    '/register'
+  ];
+
+  const isLightBackgroundPage = lightBackgroundPages.some(page => 
+    pathname.startsWith(page)
+  );
 
   useEffect(() => {
     // Get user info
@@ -64,9 +77,9 @@ export default function PublicNavbar() {
       ref={navRef}
       className={`
         fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out
-        ${isScrolled 
+        ${isScrolled || isLightBackgroundPage
           ? 'bg-white/95 backdrop-blur-md shadow-lg' 
-          : 'bg-transparent'
+          : 'bg-white/10 backdrop-blur-sm'
         }
       `}
     >
@@ -77,7 +90,7 @@ export default function PublicNavbar() {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <Logo isScrolled={isScrolled} />
+            <Logo isScrolled={isScrolled || isLightBackgroundPage} />
           </Link>
 
           {/* Desktop Navigation */}
@@ -86,9 +99,9 @@ export default function PublicNavbar() {
               href="/" 
               className={`
                 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
-                ${isScrolled 
+                ${isScrolled || isLightBackgroundPage
                   ? 'text-gray-900 hover:bg-gray-100' 
-                  : 'text-white bg-black/20 backdrop-blur-sm'
+                  : 'text-gray-900 bg-white/20 backdrop-blur-sm hover:bg-white/30'
                 }
               `}
             >
@@ -104,7 +117,7 @@ export default function PublicNavbar() {
                   href={link.href}
                   className={`
                     text-sm font-medium transition-all duration-300 hover:opacity-80
-                    ${isScrolled ? 'text-gray-700' : 'text-white/90'}
+                    ${isScrolled || isLightBackgroundPage ? 'text-gray-700' : 'text-gray-800'}
                   `}
                 >
                   {link.label}
@@ -122,9 +135,9 @@ export default function PublicNavbar() {
                 asChild
                 className={`
                   px-6 py-2 rounded-full text-sm font-medium transition-all duration-300
-                  ${isScrolled 
+                  ${isScrolled || isLightBackgroundPage
                     ? 'bg-gray-900 text-white hover:bg-gray-800' 
-                    : 'bg-white/20 text-white backdrop-blur-sm hover:bg-white/30 border border-white/30'
+                    : 'bg-gray-900 text-white hover:bg-gray-800 shadow-lg'
                   }
                 `}
               >
@@ -141,7 +154,7 @@ export default function PublicNavbar() {
                   variant="ghost"
                   size="icon"
                   className={`
-                    ${isScrolled ? 'text-gray-900' : 'text-white'}
+                    ${isScrolled || isLightBackgroundPage ? 'text-gray-900' : 'text-gray-900'}
                   `}
                 >
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

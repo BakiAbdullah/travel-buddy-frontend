@@ -1,16 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
 import {
-  Calendar,
-  User,
   ArrowRight,
+  Calendar,
   Clock,
-  Tag,
   Search,
+  Tag,
   TrendingUp,
+  User,
 } from "lucide-react";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function BlogPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -118,18 +118,40 @@ export default function BlogPage() {
   const featuredPosts = blogPosts.filter((post) => post.featured);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-10 container mx-auto">
-      {/* Header */}
-      <div className="bg-linear-to-r from-indigo-600 to-purple-600 text-white py-16 ">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">Travel Blog</h1>
-          <p className="text-xl text-blue-50 max-w-2xl">
+    <div className="min-h-screen bg-gray-50">
+      {/* Header - Full Width */}
+      <div className="relative text-white py-28 pt-38 overflow-hidden">
+        {/* Background Image */}
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/adventure-bg.jpg')`,
+          }}
+        />
+        
+        {/* Dark Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50"></div>
+        
+        {/* Optional: Gradient overlay for even better text contrast */}
+        <div className="absolute inset-0 bg-linear-to-r from-black/60 via-black/30 to-black/60"></div>
+        
+        {/* Content */}
+        <div className="max-w-7xl text-center mx-auto px-6 relative z-10">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4 text-white drop-shadow-lg">
+            Travel Blog
+          </h1>
+          <p className="text-base md:text-xl text-blue-100 drop-shadow-md">
             Stories, tips, and inspiration from travelers around the world
           </p>
         </div>
+        
+        {/* Optional: Decorative elements */}
+        <div className="absolute top-10 right-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+        <div className="absolute bottom-10 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-2xl"></div>
       </div>
 
-      <div className=" mx-auto py-12">
+      {/* Content Container */}
+      <div className="container mx-auto py-12">
         {/* Search and Filter */}
         <div className="mb-12">
           <div className="flex flex-col md:flex-row gap-4 mb-6">

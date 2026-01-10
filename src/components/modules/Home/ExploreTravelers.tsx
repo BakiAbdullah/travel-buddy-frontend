@@ -57,10 +57,10 @@ const ExploreTravelers = ({ allUsers }: AllUserInfoProps) => {
   });
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50/30 to-purple-50/50 dark:from-slate-950 dark:via-indigo-950/30 dark:to-purple-950/50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-indigo-50/30 to-purple-50/50 dark:from-slate-950 dark:via-indigo-950/30 dark:to-purple-950/50 pt-24 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header Section */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-12 pt-24">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-full mb-6">
             <Compass className="w-4 h-4 text-blue-600 dark:text-blue-400" />
             <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">

@@ -41,13 +41,34 @@ export default function TravelPlans({ allTravelPlans }: any) {
   return (
     <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-orange-50">
       {/* Header */}
-      <div className="bg-linear-to-r from-indigo-600 to-purple-600 text-white py-16 px-6">
-        <div className="max-w-7xl mx-auto">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">Travel Plans</h1>
-          <p className="text-xl text-blue-50">
+      <div className="relative bg-gray-900 text-white pb-24 pt-38 px-6 overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url('/adventure-bg.jpg')`,
+          }}
+        />
+
+        {/* Dark Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50"></div>
+
+        {/* Optional: Gradient overlay for even better text contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/60"></div>
+
+        {/* Content */}
+        <div className="relative z-10 max-w-7xl text-center mx-auto">
+          <h1 className="text-5xl  md:text-6xl font-bold mb-4 text-white drop-shadow-lg">
+            Travel Plans
+          </h1>
+          <p className="text-xl text-blue-100 drop-shadow-md">
             Discover and join exciting travel adventures
           </p>
         </div>
+
+        {/* Optional: Decorative elements */}
+        <div className="absolute top-10 right-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
+        <div className="absolute bottom-10 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-2xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-12">
