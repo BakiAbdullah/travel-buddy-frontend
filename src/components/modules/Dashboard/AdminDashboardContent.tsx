@@ -2,6 +2,7 @@
 "use client";
 
 import {
+  ArrowBigLeft,
   ArrowUpRight,
   Calendar,
   MapPin,
@@ -10,6 +11,7 @@ import {
   TrendingUp,
   Users
 } from "lucide-react";
+import Link from "next/link";
 
 interface AdminDashboardContentProps {
   users: any[];
@@ -39,12 +41,21 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
         {/* Minimalist Header */}
         <div className="flex items-center justify-between mb-12">
           <div>
-            <h1 className="text-2xl font-light text-gray-900 tracking-tight">Dashboard</h1>
-            <p className="text-sm text-gray-500 mt-1 font-light">Travel Buddy Analytics</p>
+            <h1 className="text-2xl font-light text-gray-900 tracking-tight">
+              Dashboard
+            </h1>
+            <p className="text-sm text-gray-500 mt-1 font-light">
+              Trip Mates Analytics
+            </p>
           </div>
           <div className="flex items-center space-x-3">
-            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span className="text-xs text-gray-500 font-medium">Live</span>
+            <Link
+              className=" px-4 py-2 bg-linear-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition font-medium text-sm flex items-center justify-center gap-2"
+              href={"/"}
+            >
+              <ArrowBigLeft className="w-4 h-4" />
+              Back Home
+            </Link>
           </div>
         </div>
 
@@ -59,11 +70,15 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
                 <ArrowUpRight className="h-4 w-4 text-gray-400 group-hover:text-blue-600 transition-colors" />
               </div>
               <div className="space-y-1">
-                <p className="text-2xl font-light text-gray-900">{totalUsers.toLocaleString()}</p>
+                <p className="text-2xl font-light text-gray-900">
+                  {totalUsers.toLocaleString()}
+                </p>
                 <p className="text-xs text-gray-500 font-medium">Total Users</p>
                 <div className="flex items-center space-x-2 mt-2">
                   <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                  <span className="text-xs text-gray-600">{activeUsers} active</span>
+                  <span className="text-xs text-gray-600">
+                    {activeUsers} active
+                  </span>
                 </div>
               </div>
             </div>
@@ -78,11 +93,17 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
                 <ArrowUpRight className="h-4 w-4 text-gray-400 group-hover:text-emerald-600 transition-colors" />
               </div>
               <div className="space-y-1">
-                <p className="text-2xl font-light text-gray-900">{totalTravelPlans.toLocaleString()}</p>
-                <p className="text-xs text-gray-500 font-medium">Travel Plans</p>
+                <p className="text-2xl font-light text-gray-900">
+                  {totalTravelPlans.toLocaleString()}
+                </p>
+                <p className="text-xs text-gray-500 font-medium">
+                  Travel Plans
+                </p>
                 <div className="flex items-center space-x-2 mt-2">
                   <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                  <span className="text-xs text-gray-600">{activeTravelPlans} active</span>
+                  <span className="text-xs text-gray-600">
+                    {activeTravelPlans} active
+                  </span>
                 </div>
               </div>
             </div>
@@ -97,11 +118,15 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
                 <ArrowUpRight className="h-4 w-4 text-gray-400 group-hover:text-amber-600 transition-colors" />
               </div>
               <div className="space-y-1">
-                <p className="text-2xl font-light text-gray-900">{totalReviews.toLocaleString()}</p>
+                <p className="text-2xl font-light text-gray-900">
+                  {totalReviews.toLocaleString()}
+                </p>
                 <p className="text-xs text-gray-500 font-medium">Reviews</p>
                 <div className="flex items-center space-x-2 mt-2">
                   <Star className="w-3 h-3 text-amber-500 fill-current" />
-                  <span className="text-xs text-gray-600">{averageRating} average</span>
+                  <span className="text-xs text-gray-600">
+                    {averageRating} average
+                  </span>
                 </div>
               </div>
             </div>
@@ -120,7 +145,9 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
                 <p className="text-xs text-gray-500 font-medium">Uptime</p>
                 <div className="flex items-center space-x-2 mt-2">
                   <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
-                  <span className="text-xs text-gray-600">All systems operational</span>
+                  <span className="text-xs text-gray-600">
+                    All systems operational
+                  </span>
                 </div>
               </div>
             </div>
@@ -134,7 +161,9 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
               <div className="p-6 border-b border-gray-50">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-light text-gray-900">Recent Users</h3>
+                  <h3 className="text-lg font-light text-gray-900">
+                    Recent Users
+                  </h3>
                   <button className="p-1 hover:bg-gray-50 rounded-lg transition-colors">
                     <MoreHorizontal className="w-4 h-4 text-gray-400" />
                   </button>
@@ -143,10 +172,13 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
               <div className="p-6">
                 <div className="space-y-4">
                   {recentUsers.map((user: any, index: number) => (
-                    <div key={user.id || index} className="flex items-center space-x-3 group">
+                    <div
+                      key={user.id || index}
+                      className="flex items-center space-x-3 group"
+                    >
                       <div className="relative">
                         <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white text-sm font-medium">
-                          {user.name?.charAt(0)?.toUpperCase() || 'U'}
+                          {user.name?.charAt(0)?.toUpperCase() || "U"}
                         </div>
                         {!user.isDeleted && (
                           <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
@@ -154,13 +186,17 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="text-sm font-medium text-gray-900 truncate">
-                          {user.name || 'Unknown User'}
+                          {user.name || "Unknown User"}
                         </p>
                         <p className="text-xs text-gray-500 truncate">
-                          {user.email || 'No email'}
+                          {user.email || "No email"}
                         </p>
                       </div>
-                      <div className={`w-2 h-2 rounded-full ${user.isDeleted ? 'bg-gray-300' : 'bg-green-500'}`}></div>
+                      <div
+                        className={`w-2 h-2 rounded-full ${
+                          user.isDeleted ? "bg-gray-300" : "bg-green-500"
+                        }`}
+                      ></div>
                     </div>
                   ))}
                   {recentUsers.length === 0 && (
@@ -179,7 +215,9 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
               <div className="p-6 border-b border-gray-50">
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-light text-gray-900">Recent Travel Plans</h3>
+                  <h3 className="text-lg font-light text-gray-900">
+                    Recent Travel Plans
+                  </h3>
                   <button className="p-1 hover:bg-gray-50 rounded-lg transition-colors">
                     <MoreHorizontal className="w-4 h-4 text-gray-400" />
                   </button>
@@ -196,20 +234,32 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
                           </div>
                           <div className="flex-1">
                             <p className="text-sm font-medium text-gray-900 mb-1">
-                              {plan.destination || 'Unknown Destination'}
+                              {plan.destination || "Unknown Destination"}
                             </p>
                             <div className="flex items-center space-x-4 text-xs text-gray-500">
                               <span className="flex items-center">
                                 <Calendar className="w-3 h-3 mr-1" />
-                                {plan.startDate ? new Date(plan.startDate).toLocaleDateString() : 'No date'}
+                                {plan.startDateTime
+                                  ? new Date(
+                                      plan.startDateTime
+                                    ).toLocaleDateString()
+                                  : "No date"}
                               </span>
-                              <span>${plan.budget || 'Not specified'}</span>
+                              <span>
+                                ${plan.budgetRange || "Not specified"}
+                              </span>
                             </div>
                           </div>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <div className={`w-2 h-2 rounded-full ${plan.status === 'ACTIVE' ? 'bg-green-500' : 'bg-gray-300'}`}></div>
-                          <span className="text-xs text-gray-500 font-medium">{plan.status || 'Unknown'}</span>
+                          <div
+                            className={`w-2 h-2 rounded-full ${
+                              plan.isCompleted ? "bg-green-500" : "bg-gray-300"
+                            }`}
+                          ></div>
+                          <span className="text-xs text-gray-500 font-medium">
+                            {plan.isCompleted ? "Completed" : "Not Completed"}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -217,7 +267,9 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
                   {recentTravelPlans.length === 0 && (
                     <div className="text-center py-8">
                       <MapPin className="w-8 h-8 text-gray-300 mx-auto mb-2" />
-                      <p className="text-sm text-gray-500">No travel plans found</p>
+                      <p className="text-sm text-gray-500">
+                        No travel plans found
+                      </p>
                     </div>
                   )}
                 </div>
@@ -230,7 +282,9 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div className="p-6 border-b border-gray-50">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-light text-gray-900">Recent Reviews</h3>
+              <h3 className="text-lg font-light text-gray-900">
+                Recent Reviews
+              </h3>
               <button className="p-1 hover:bg-gray-50 rounded-lg transition-colors">
                 <MoreHorizontal className="w-4 h-4 text-gray-400" />
               </button>
@@ -244,22 +298,27 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
                     <div className="flex items-center justify-between mb-3">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 rounded-full bg-linear-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white text-xs font-medium">
-                          {review.reviewer?.name?.charAt(0)?.toUpperCase() || 'U'}
+                          {review.reviewer?.name?.charAt(0)?.toUpperCase() ||
+                            "U"}
                         </div>
                         <span className="text-sm font-medium text-gray-900 truncate">
-                          {review.reviewer?.name || 'Anonymous'}
+                          {review.reviewer?.name || "Anonymous"}
                         </span>
                       </div>
                       <div className="flex items-center space-x-1">
                         <Star className="w-3 h-3 text-amber-400 fill-current" />
-                        <span className="text-xs font-medium text-gray-600">{review.rating || 0}</span>
+                        <span className="text-xs font-medium text-gray-600">
+                          {review.rating || 0}
+                        </span>
                       </div>
                     </div>
                     <p className="text-xs text-gray-600 line-clamp-3 leading-relaxed mb-3">
-                      {review.comment || review.review || 'No comment provided'}
+                      {review.comment || review.review || "No comment provided"}
                     </p>
                     <p className="text-xs text-gray-400">
-                      {review.createdAt ? new Date(review.createdAt).toLocaleDateString() : 'No date'}
+                      {review.createdAt
+                        ? new Date(review.createdAt).toLocaleDateString()
+                        : "No date"}
                     </p>
                   </div>
                 </div>

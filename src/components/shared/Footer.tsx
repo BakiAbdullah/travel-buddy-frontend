@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import Logo from "@/assets/Logo";
 import Link from "next/link";
@@ -23,7 +23,8 @@ const Footer = () => {
     const linksContainer = linksContainerRef.current;
     const copyright = copyrightRef.current;
 
-    if (!footer || !logo || !socialLinks || !linksContainer || !copyright) return;
+    if (!footer || !logo || !socialLinks || !linksContainer || !copyright)
+      return;
 
     // Set initial states
     gsap.set([logo, socialLinks], { opacity: 0, y: 30 });
@@ -36,8 +37,8 @@ const Footer = () => {
         trigger: footer,
         start: "top 80%",
         end: "bottom 20%",
-        toggleActions: "play none none reverse"
-      }
+        toggleActions: "play none none reverse",
+      },
     });
 
     // Animate logo and description
@@ -45,30 +46,42 @@ const Footer = () => {
       opacity: 1,
       y: 0,
       duration: 0.8,
-      ease: "power2.out"
+      ease: "power2.out",
     })
-    // Animate social links with stagger
-    .to(socialLinks.children, {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      stagger: 0.1,
-      ease: "power2.out"
-    }, "-=0.4")
-    // Animate footer links columns
-    .to(linksContainer.children, {
-      opacity: 1,
-      y: 0,
-      duration: 0.6,
-      stagger: 0.15,
-      ease: "power2.out"
-    }, "-=0.3")
-    // Animate copyright
-    .to(copyright, {
-      opacity: 1,
-      duration: 0.5,
-      ease: "power2.out"
-    }, "-=0.2");
+      // Animate social links with stagger
+      .to(
+        socialLinks.children,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power2.out",
+        },
+        "-=0.4"
+      )
+      // Animate footer links columns
+      .to(
+        linksContainer.children,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.15,
+          ease: "power2.out",
+        },
+        "-=0.3"
+      )
+      // Animate copyright
+      .to(
+        copyright,
+        {
+          opacity: 1,
+          duration: 0.5,
+          ease: "power2.out",
+        },
+        "-=0.2"
+      );
 
     // Add floating animation for background elements
     gsap.to(".floating-element", {
@@ -77,41 +90,41 @@ const Footer = () => {
       ease: "power1.inOut",
       yoyo: true,
       repeat: -1,
-      stagger: 0.5
+      stagger: 0.5,
     });
 
     // Add hover animations for social links
-    const socialIcons = socialLinks.querySelectorAll('a');
+    const socialIcons = socialLinks.querySelectorAll("a");
     socialIcons.forEach((icon) => {
-      icon.addEventListener('mouseenter', () => {
+      icon.addEventListener("mouseenter", () => {
         gsap.to(icon, { scale: 1.2, duration: 0.3, ease: "power2.out" });
       });
-      icon.addEventListener('mouseleave', () => {
+      icon.addEventListener("mouseleave", () => {
         gsap.to(icon, { scale: 1, duration: 0.3, ease: "power2.out" });
       });
     });
 
     // Cleanup
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
   return (
-    <footer 
+    <footer
       ref={footerRef}
       className="relative footer-background overflow-hidden"
     >
       {/* Background pattern overlay with animated elements */}
-      <div 
+      <div
         className="absolute inset-0 opacity-10"
         style={{
           backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%), 
                            radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 0%, transparent 50%),
-                           linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.02) 50%, transparent 60%)`
+                           linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.02) 50%, transparent 60%)`,
         }}
       ></div>
-      
+
       {/* Animated floating elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="floating-element footer-floating-element absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400/20 rounded-full"></div>
@@ -119,10 +132,10 @@ const Footer = () => {
         <div className="floating-element footer-floating-element absolute top-1/2 left-3/4 w-1.5 h-1.5 bg-pink-400/20 rounded-full"></div>
         <div className="floating-element footer-floating-element absolute top-1/3 right-1/3 w-1 h-1 bg-purple-400/25 rounded-full"></div>
       </div>
-      
+
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-black/60"></div>
-      
+
       {/* Content */}
       <div className="relative mx-auto container space-y-8 px-6 py-16 text-white">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
@@ -130,8 +143,9 @@ const Footer = () => {
             {/* Logo */}
             <Logo />
             <p className="mt-4 max-w-xs text-gray-300">
-              Discover amazing destinations, plan unforgettable trips, and create 
-              memories that last a lifetime with your trusted travel companion.
+              Discover amazing destinations, plan unforgettable trips, and
+              create memories that last a lifetime with your trusted travel
+              companion.
             </p>
 
             <ul ref={socialLinksRef} className="mt-8 flex gap-6">
@@ -214,7 +228,7 @@ const Footer = () => {
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
-                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                   </svg>
                 </Link>
               </li>
@@ -233,16 +247,21 @@ const Footer = () => {
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
-                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z"/>
+                    <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24.009c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z" />
                   </svg>
                 </Link>
               </li>
             </ul>
           </div>
 
-          <div ref={linksContainerRef} className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
+          <div
+            ref={linksContainerRef}
+            className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4"
+          >
             <div>
-              <p className="footer-section-title font-medium text-gray-200 mb-6">Services</p>
+              <p className="footer-section-title font-medium text-gray-200 mb-6">
+                Services
+              </p>
               <ul className="space-y-4 text-sm">
                 <li>
                   <Link
@@ -280,7 +299,9 @@ const Footer = () => {
             </div>
 
             <div>
-              <p className="footer-section-title font-medium text-gray-200 mb-6">Destinations</p>
+              <p className="footer-section-title font-medium text-gray-200 mb-6">
+                Destinations
+              </p>
               <ul className="space-y-4 text-sm">
                 <li>
                   <Link
@@ -318,7 +339,9 @@ const Footer = () => {
             </div>
 
             <div>
-              <p className="footer-section-title font-medium text-gray-200 mb-6">Support</p>
+              <p className="footer-section-title font-medium text-gray-200 mb-6">
+                Support
+              </p>
               <ul className="space-y-4 text-sm">
                 <li>
                   <Link
@@ -356,14 +379,16 @@ const Footer = () => {
             </div>
 
             <div>
-              <p className="footer-section-title font-medium text-gray-200 mb-6">Company</p>
+              <p className="footer-section-title font-medium text-gray-200 mb-6">
+                Company
+              </p>
               <ul className="space-y-4 text-sm">
                 <li>
                   <Link
                     href="/about"
                     className="footer-link text-gray-300 transition hover:text-white hover:opacity-75"
                   >
-                    About Travel Buddy
+                    About Trip Mate{" "}
                   </Link>
                 </li>
                 <li>
@@ -395,7 +420,10 @@ const Footer = () => {
           </div>
         </div>
 
-        <p ref={copyrightRef} className="footer-copyright text-xs text-gray-400 pt-8 border-t border-gray-700">
+        <p
+          ref={copyrightRef}
+          className="footer-copyright text-xs text-gray-400 pt-8 border-t border-gray-700"
+        >
           &copy; 2025. Travel Buddy. All rights reserved.
         </p>
       </div>

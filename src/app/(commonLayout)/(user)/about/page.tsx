@@ -6,24 +6,24 @@ export default function AboutPage() {
       {/* Hero Section */}
       <section className="relative overflow-hidden text-white py-24 px-6 pt-38">
         {/* Background Image */}
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage: `url('/adventure-bg.jpg')`,
           }}
         />
-        
+
         {/* Dark Overlay for better text readability */}
         <div className="absolute inset-0 bg-black/50"></div>
-        
+
         {/* Optional: Gradient overlay for even better text contrast */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-black/60"></div>
-        
+
         {/* Content */}
         <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 text-white drop-shadow-lg">
-              About Travel Buddy
+              About Trip Mate{" "}
             </h1>
             <p className="text-base md:text-xl text-blue-100 max-w-3xl mx-auto drop-shadow-md">
               Connecting wanderers, creating memories, and making every journey
@@ -31,7 +31,7 @@ export default function AboutPage() {
             </p>
           </div>
         </div>
-        
+
         {/* Optional: Decorative elements */}
         <div className="absolute top-10 right-10 w-20 h-20 bg-white/10 rounded-full blur-xl"></div>
         <div className="absolute bottom-10 left-10 w-32 h-32 bg-blue-400/20 rounded-full blur-2xl"></div>

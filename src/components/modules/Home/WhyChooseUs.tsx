@@ -1,14 +1,9 @@
-'use client';
+"use client";
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import {
-  Users,
-  Shield,
-  Zap,
-  Headphones
-} from "lucide-react";
+import { Users, Shield, Zap, Headphones } from "lucide-react";
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
@@ -25,23 +20,27 @@ const WhyChooseUs = () => {
     {
       icon: Users,
       title: "50K+ Active Users",
-      description: "Join our thriving community of verified travelers from around the world, ready to share amazing adventures."
+      description:
+        "Join our thriving community of verified travelers from around the world, ready to share amazing adventures.",
     },
     {
       icon: Shield,
       title: "100% Safe & Verified",
-      description: "Every travel buddy goes through our comprehensive verification process ensuring your safety and peace of mind."
+      description:
+        "Every travel buddy goes through our comprehensive verification process ensuring your safety and peace of mind.",
     },
     {
       icon: Zap,
       title: "Instant Matching",
-      description: "Our smart algorithm instantly connects you with compatible travel companions based on your interests and preferences."
+      description:
+        "Our smart algorithm instantly connects you with compatible travel companions based on your interests and preferences.",
     },
     {
       icon: Headphones,
       title: "24/7 Travel Support",
-      description: "Get round-the-clock assistance from our dedicated support team throughout your entire travel journey."
-    }
+      description:
+        "Get round-the-clock assistance from our dedicated support team throughout your entire travel journey.",
+    },
   ];
 
   useEffect(() => {
@@ -49,12 +48,12 @@ const WhyChooseUs = () => {
       // Initial setup - hide elements
       gsap.set([titleRef.current, descriptionRef.current], {
         opacity: 0,
-        y: 30
+        y: 30,
       });
 
       gsap.set(".feature-item", {
         opacity: 0,
-        y: 50
+        y: 50,
       });
 
       // Main timeline
@@ -63,8 +62,8 @@ const WhyChooseUs = () => {
           trigger: sectionRef.current,
           start: "top 80%",
           end: "bottom 20%",
-          toggleActions: "play none none reverse"
-        }
+          toggleActions: "play none none reverse",
+        },
       });
 
       // Animate title and description
@@ -72,23 +71,30 @@ const WhyChooseUs = () => {
         opacity: 1,
         y: 0,
         duration: 0.8,
-        ease: "power3.out"
-      })
-      .to(descriptionRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        ease: "power3.out"
-      }, "-=0.4")
-      // Animate feature items with stagger
-      .to(".feature-item", {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
         ease: "power3.out",
-        stagger: 0.15
-      }, "-=0.2");
-
+      })
+        .to(
+          descriptionRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power3.out",
+          },
+          "-=0.4"
+        )
+        // Animate feature items with stagger
+        .to(
+          ".feature-item",
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power3.out",
+            stagger: 0.15,
+          },
+          "-=0.2"
+        );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -102,7 +108,7 @@ const WhyChooseUs = () => {
           <div ref={titleRef}>
             {/* Badge */}
             <div className="inline-flex items-center px-4 py-2 bg-gray-100 rounded-full text-sm text-gray-600 font-medium mb-8">
-              WHY CHOOSE TRAVEL BUDDY
+              WHY CHOOSE Trip Mate{" "}
             </div>
 
             {/* Main Title */}
@@ -117,8 +123,9 @@ const WhyChooseUs = () => {
             ref={descriptionRef}
             className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto"
           >
-            Connect with verified travel companions, explore amazing destinations safely, 
-            and create unforgettable memories with like-minded adventurers from around the world.
+            Connect with verified travel companions, explore amazing
+            destinations safely, and create unforgettable memories with
+            like-minded adventurers from around the world.
           </p>
         </div>
 

@@ -1,12 +1,10 @@
-
-"use client"
+"use client";
 import Image from "next/image";
-import banner  from "@/assets/andres-molina-5boA6Onp77c-unsplash.jpg";
+import banner from "@/assets/andres-molina-5boA6Onp77c-unsplash.jpg";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Button } from "@/components/ui/button";
-
 
 // Register GSAP plugins
 if (typeof window !== "undefined") {
@@ -22,10 +20,13 @@ const Hero = () => {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Initial setup - hide elements
-      gsap.set([titleRef.current, subtitleRef.current, aboutSectionRef.current], {
-        opacity: 0,
-        y: 50
-      });
+      gsap.set(
+        [titleRef.current, subtitleRef.current, aboutSectionRef.current],
+        {
+          opacity: 0,
+          y: 50,
+        }
+      );
 
       // Main timeline
       const tl = gsap.timeline({ delay: 0.5 });
@@ -35,57 +36,69 @@ const Hero = () => {
         opacity: 1,
         y: 0,
         duration: 1.2,
-        ease: "power3.out"
+        ease: "power3.out",
       })
-      // Animate subtitle
-      .to(subtitleRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out"
-      }, "-=0.8")
-      // Animate about section
-      .to(aboutSectionRef.current, {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out"
-      }, "-=0.6");
+        // Animate subtitle
+        .to(
+          subtitleRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "-=0.8"
+        )
+        // Animate about section
+        .to(
+          aboutSectionRef.current,
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power3.out",
+          },
+          "-=0.6"
+        );
 
       // Cloud blob animations - more realistic fume movement
       gsap.to(".cloud-path-1", {
-        morphSVG: "M0,110 C90,70 170,90 250,75 C330,60 410,80 490,65 C570,50 650,75 730,60 C810,45 890,70 970,55 C1050,40 1130,65 1200,50 L1200,240 L0,240 Z",
+        morphSVG:
+          "M0,110 C90,70 170,90 250,75 C330,60 410,80 490,65 C570,50 650,75 730,60 C810,45 890,70 970,55 C1050,40 1130,65 1200,50 L1200,240 L0,240 Z",
         duration: 12,
         ease: "sine.inOut",
         repeat: -1,
-        yoyo: true
+        yoyo: true,
       });
 
       gsap.to(".cloud-path-2", {
-        morphSVG: "M0,90 C110,50 210,70 310,55 C410,40 510,60 610,45 C710,30 810,55 910,40 C1010,25 1110,50 1200,35 L1200,240 L0,240 Z",
+        morphSVG:
+          "M0,90 C110,50 210,70 310,55 C410,40 510,60 610,45 C710,30 810,55 910,40 C1010,25 1110,50 1200,35 L1200,240 L0,240 Z",
         duration: 15,
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
-        delay: 2
+        delay: 2,
       });
 
       gsap.to(".cloud-path-3", {
-        morphSVG: "M0,80 C160,35 310,60 460,40 C610,20 760,45 910,25 C1060,5 1200,30 1200,15 L1200,240 L0,240 Z",
+        morphSVG:
+          "M0,80 C160,35 310,60 460,40 C610,20 760,45 910,25 C1060,5 1200,30 1200,15 L1200,240 L0,240 Z",
         duration: 18,
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
-        delay: 4
+        delay: 4,
       });
 
       gsap.to(".cloud-path-4", {
-        morphSVG: "M0,60 C210,15 410,40 610,20 C810,0 1010,25 1200,5 L1200,240 L0,240 Z",
+        morphSVG:
+          "M0,60 C210,15 410,40 610,20 C810,0 1010,25 1200,5 L1200,240 L0,240 Z",
         duration: 20,
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
-        delay: 1
+        delay: 1,
       });
 
       // Animate cloud details (small circles)
@@ -95,7 +108,7 @@ const Hero = () => {
         duration: 8,
         ease: "sine.inOut",
         repeat: -1,
-        yoyo: true
+        yoyo: true,
       });
 
       gsap.to(".cloud-detail-2", {
@@ -105,7 +118,7 @@ const Hero = () => {
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
-        delay: 1
+        delay: 1,
       });
 
       gsap.to(".cloud-detail-3", {
@@ -115,7 +128,7 @@ const Hero = () => {
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
-        delay: 2
+        delay: 2,
       });
 
       gsap.to(".cloud-detail-4", {
@@ -125,7 +138,7 @@ const Hero = () => {
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
-        delay: 3
+        delay: 3,
       });
 
       gsap.to(".cloud-detail-5", {
@@ -135,7 +148,7 @@ const Hero = () => {
         ease: "sine.inOut",
         repeat: -1,
         yoyo: true,
-        delay: 0.5
+        delay: 0.5,
       });
 
       // Alternative floating animation if morphSVG is not available
@@ -144,7 +157,7 @@ const Hero = () => {
         duration: 4,
         ease: "sine.inOut",
         repeat: -1,
-        yoyo: true
+        yoyo: true,
       });
 
       // Background parallax
@@ -155,8 +168,8 @@ const Hero = () => {
           trigger: heroRef.current,
           start: "top bottom",
           end: "bottom top",
-          scrub: true
-        }
+          scrub: true,
+        },
       });
 
       // Cloud blob scroll animation
@@ -167,10 +180,9 @@ const Hero = () => {
           trigger: heroRef.current,
           start: "center bottom",
           end: "bottom top",
-          scrub: 1
-        }
+          scrub: 1,
+        },
       });
-
     }, heroRef);
 
     return () => ctx.revert();
@@ -548,7 +560,7 @@ const Hero = () => {
         >
           {/* About Us Badge */}
           <div className="inline-flex items-center px-4 py-2 bg-gray-100 rounded-full text-sm text-gray-600 font-medium mb-8">
-            About Travel Buddy
+            About Trip Mate{" "}
           </div>
 
           {/* Section Title */}
@@ -570,7 +582,7 @@ const Hero = () => {
 
           {/* CTA Button */}
           <Button className="px-10 py-2 rounded-full text-sm font-medium transition-all duration-300 bg-gray-900 text-white hover:bg-gray-800 border border-white/30">
-            Find Your Travel Buddy
+            Find Your Trip Mate{" "}
             <svg
               className="ml-2 w-5 h-5"
               fill="none"

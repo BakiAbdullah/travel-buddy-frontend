@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
@@ -33,8 +33,8 @@ const ChooseYourAdventure = () => {
         trigger: section,
         start: "top 70%",
         end: "bottom 30%",
-        toggleActions: "play none none reverse"
-      }
+        toggleActions: "play none none reverse",
+      },
     });
 
     // Animate elements
@@ -42,37 +42,45 @@ const ChooseYourAdventure = () => {
       opacity: 1,
       y: 0,
       duration: 0.8,
-      ease: "power2.out"
+      ease: "power2.out",
     })
-    .to(title, {
-      opacity: 1,
-      y: 0,
-      duration: 1,
-      ease: "power2.out"
-    }, "-=0.4")
-    .to(buttons.children, {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      duration: 0.6,
-      stagger: 0.2,
-      ease: "back.out(1.7)"
-    }, "-=0.3");
+      .to(
+        title,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
+        },
+        "-=0.4"
+      )
+      .to(
+        buttons.children,
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.2,
+          ease: "back.out(1.7)",
+        },
+        "-=0.3"
+      );
 
     // Add button hover animations
-    const buttonElements = buttons.querySelectorAll('a');
+    const buttonElements = buttons.querySelectorAll("a");
     buttonElements.forEach((button) => {
-      button.addEventListener('mouseenter', () => {
+      button.addEventListener("mouseenter", () => {
         gsap.to(button, { scale: 1.05, duration: 0.3, ease: "power2.out" });
       });
-      button.addEventListener('mouseleave', () => {
+      button.addEventListener("mouseleave", () => {
         gsap.to(button, { scale: 1, duration: 0.3, ease: "power2.out" });
       });
     });
 
     // Cleanup
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
@@ -108,7 +116,7 @@ const ChooseYourAdventure = () => {
           ref={brandRef}
           className="text-white/80 text-sm font-medium tracking-[0.2em] uppercase mb-8"
         >
-          TRAVEL BUDDY
+          Trip Mate{" "}
         </p>
 
         {/* Main Title */}
