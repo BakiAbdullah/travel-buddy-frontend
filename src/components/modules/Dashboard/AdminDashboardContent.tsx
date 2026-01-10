@@ -30,7 +30,7 @@ const AdminDashboardContent = ({ users, travelPlans, reviews }: AdminDashboardCo
     ? (reviews.reduce((sum: number, review: any) => sum + review.rating, 0) / reviews.length).toFixed(1)
     : 0;
 
-  // Recent activities
+  // Recent activities />
   const recentUsers = users.slice(0, 4);
   const recentTravelPlans = travelPlans.slice(0, 4);
   const recentReviews = reviews.slice(0, 6);
