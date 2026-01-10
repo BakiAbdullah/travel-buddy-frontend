@@ -29,7 +29,7 @@ const DashboardMobileSidebar = ({
       {/* Logo */}
       <div className="flex h-16 items-center border-b px-6">
         <Link href={dashboardHome} className="flex items-center space-x-2">
-          <Logo />
+          <Logo isScrolled={ true} />
         </Link>
       </div>
       <SheetTitle className="sr-only">Navigation Menu</SheetTitle>

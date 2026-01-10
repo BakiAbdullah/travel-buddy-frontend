@@ -28,7 +28,7 @@ const DashboardSidebarContent = ({
       {/* Logo/Brand */}
       <div className="flex h-17 items-center border-b shadow-lg px-6">
         <Link href={dashboardHome} className="flex items-center space-x-2">
-          <Logo />
+          <Logo isScrolled={true} /> 
         </Link>
       </div>
 
